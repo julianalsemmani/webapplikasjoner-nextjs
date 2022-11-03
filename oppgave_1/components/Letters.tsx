@@ -1,4 +1,11 @@
 // TODO: Her er det bugs
+/* 
+  CHANGES DONE
+  > 
+
+  SUGGESTIONS
+  > 
+*/
 
 const letterList = Array.from('ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ')
 

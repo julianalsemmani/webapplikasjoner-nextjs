@@ -1,4 +1,11 @@
 // TODO: Her er det bugs
+/* 
+  CHANGES DONE
+  > 
+
+  SUGGESTIONS
+  > 
+*/
 
 import type { NextPage } from 'next'
 import { useEffect, useRef } from 'react'
@@ -31,7 +38,6 @@ const Home: NextPage = () => {
             'Content-Type': 'application/json',
           },
         })
-
         const result = { data: [] }
       } catch (error) {
         console.log(error)

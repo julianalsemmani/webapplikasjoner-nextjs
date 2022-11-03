@@ -1,4 +1,11 @@
 // TODO: Her er det bugs
+/* 
+  CHANGES DONE
+  > 
+
+  SUGGESTIONS
+  > 
+*/
 
 import { useState } from 'react'
 import { Strike } from '../components/Strikes'
@@ -21,6 +28,7 @@ export const useGame = () => {
 
   const isSolved = (country: Country, guesses: string[]) => {
     if (!country) return false
+
     return [...country.name.replaceAll(' ', '').toLowerCase()].every(
       (letter) => {
         return guesses.includes(letter)

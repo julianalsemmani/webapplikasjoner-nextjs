@@ -1,6 +1,16 @@
 // TODO: Her er det bugs
+/* 
+  CHANGES DONE
+  > 
 
-export type Strike = { icon: string; guess: string }
+  SUGGESTIONS
+  > 
+*/
+
+export type Strike = {
+  icon: string
+  guess: string
+}
 
 export default function Strikes({ strikes }: { strikes: Strike[] }) {
   return (
