@@ -44,7 +44,7 @@ const Home: NextPage = () => {
 
         const result = await response.json()
         setCountry(result.data)
-        console.log(result.data)
+        console.log(result.data.name) // FOR CONSOLE DEBUGGIN
       } catch (error) {
         console.log(error)
       }

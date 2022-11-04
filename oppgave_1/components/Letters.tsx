@@ -1,7 +1,7 @@
 // TODO: Her er det bugs
 /* 
   CHANGES DONE
-  > 
+  > uses .map() instead of forEach()
 
   SUGGESTIONS
   > 
@@ -28,7 +28,7 @@ export default function Letters({
     <>
       <p className="message">{getMessage()}</p>
       <ul className="letters">
-        {letterList.forEach((letter) => (
+        {letterList.map((letter) => (
           <Letter
             handleGuess={handleGuess}
             guesses={guesses}
@@ -43,6 +43,7 @@ export default function Letters({
 
 const Letter = ({ letter, handleGuess, guesses }: LetterProps) => {
   const letterMatch = guesses.includes(letter.toLowerCase())
+
   return (
     <button
       onClick={() => handleGuess(letter)}
