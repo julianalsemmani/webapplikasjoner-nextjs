@@ -4,7 +4,7 @@
   > 
 
   SUGGESTIONS
-  > 
+  > setStrikes(strikeCopy) in handleGuess()-function? If you choose a wrong letter, a "white circle" disappears?
 */
 
 import { useState } from 'react'
