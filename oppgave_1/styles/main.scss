@@ -1,7 +1,8 @@
 // TODO: Her er det bugs
 /* 
   CHANGES DONE
-  > 
+  > Added margin to the lettrs
+  > Changed Letter background color when clicked
 
   SUGGESTIONS
   > 
@@ -67,8 +68,9 @@ main {
     border: 2px solid #333;
     padding: 2rem;
     box-shadow: 4px 4px 0 0 #c1c1c1;
+    margin: 5px;
     &.highlight {
-      background-color: #fd2238;
+      background-color: #e1c124;
     }
   }
 }
