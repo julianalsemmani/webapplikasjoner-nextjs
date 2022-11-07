@@ -70,7 +70,6 @@ export const useGame = () => {
       setStrikes(strikeCopy)
     }
     setGuesses((prev: string[]) => [...prev, letter.toLowerCase()])
-    console.log(JSON.stringify(guesses))
   }
 
   return {
