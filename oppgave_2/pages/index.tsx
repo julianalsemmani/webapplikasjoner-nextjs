@@ -15,14 +15,15 @@ const Home: NextPage = () => {
   const displayStudents = (students: Student[]) => {
     return (
       <ul>
-        {students.map((student) => (
-          <li key={student.id}>
-            <span>
-              {student.id} {student.name} {student.age} {student.gender}{' '}
-              {student.group}
-            </span>
-          </li>
-        ))}
+        {Object.values(students).map((value, key) => {
+          return (
+            <li key={key}>
+              <span>
+                {value.id} {value.name} {value.age} {value.gender} {value.group}
+              </span>
+            </li>
+          )
+        })}
       </ul>
     )
   }
