@@ -5,6 +5,12 @@ main {
   margin: 0 auto;
 }
 
+form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 input {
   width: 20px;
   height: 20px;
