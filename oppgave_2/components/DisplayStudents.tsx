@@ -25,47 +25,62 @@ export default function DisplayStudents({
         })
 
         return (
-          <ul>
-            {students.map((student) => {
-              return (
-                <li key={student.id}>
-                  <span>{student.id}</span>
-                  <span>{student.name}</span>
-                  <span>{student.age}</span>
-                  <span>{student.gender}</span>
-                  <span>{student.group}</span>
-                </li>
-              )
-            })}
-          </ul>
+          <div>
+            <ul>
+              {students.map((student) => {
+                return (
+                  <li key={student.id}>
+                    <span>{student.id}</span>
+                    <span>{student.name}</span>
+                    <span>{student.age}</span>
+                    <span>{student.gender}</span>
+                    <span>{student.group}</span>
+                  </li>
+                )
+              })}
+            </ul>
+            <h2 className='right-align'>Antall: {students.length}</h2>
+          </div>
         )
 
       case 'age':
         return (
-          <ul>
-            <p>Display students sorted by age</p>
-          </ul>
+          <div>
+            <ul>
+              <p>Display students sorted by age</p>
+            </ul>
+            <h2 className='right-align'>Antall: {0}</h2>
+          </div>
         )
 
       case 'gender':
         return (
-          <ul>
-            <p>Display students sorted by gender</p>
-          </ul>
+          <div>
+            <ul>
+              <p>Display students sorted by gender</p>
+            </ul>
+            <h2 className='right-align'>Antall: {0}</h2>
+          </div>
         )
 
       case 'class':
         return (
-          <ul>
-            <p>Display students sorted by class</p>
-          </ul>
+          <div>
+            <ul>
+              <p>Display students sorted by class</p>
+            </ul>
+            <h2 className='right-align'>Antall: {0}</h2>
+          </div>
         )
 
       default:
         return (
-          <ul>
-            <p>Category not recognized</p>
-          </ul>
+          <div>
+            <ul>
+              <p>Category not recognized</p>
+            </ul>
+            <h2 className='right-align'>Antall: {0}</h2>
+          </div>
         )
     }
   }
