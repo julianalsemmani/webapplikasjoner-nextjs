@@ -1,44 +1,15 @@
 import type { NextPage } from 'next'
 import { useState, useEffect, ChangeEvent } from 'react'
+import DisplayStudents from '../components/DisplayStudents'
 import RadioButtons from '../components/RadioButtons'
 import { Student } from '../types/'
 
 const Home: NextPage = () => {
   const [students, setStudents] = useState<Student[]>([])
-  const [status, setStatus] = useState('')
+  const [category, setCategory] = useState('')
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setStatus(event.target.value)
-  }
-
-  // CAN REMOVE: Function to test display of students
-  const displayStudents = (students: Student[]) => {
-    students.sort((a, b) => {
-      if (a.name < b.name) {
-        return -1
-      }
-
-      if (a.name > b.name) {
-        return 1
-      }
-
-      return 0
-    })
-
-    return (
-      <ul>
-        {students.map((student) => {
-          return (
-            <li key={student.id}>
-              <span>
-                {student.id} {student.name} {student.age} {student.gender}{' '}
-                {student.group}
-              </span>
-            </li>
-          )
-        })}
-      </ul>
-    )
+    setCategory(event.target.value)
   }
 
   useEffect(() => {
@@ -63,15 +34,13 @@ const Home: NextPage = () => {
 
   return (
     <main>
-      {/* DEBUGGING TO SEE CURRENT STATUS*/}
+      {/* DEBUGGING TO SEE CURRENT CATEGORY*/}
       <p>DEBUG</p>
-      <p>Current status: {status}</p>
+      <p>Current category: {category}</p>
 
       <h1>Student gruppering</h1>
       <RadioButtons handleChange={handleChange} />
-
-      {/* TESTING DISPLAY OF STUDENTS */}
-      {displayStudents(students)}
+      <DisplayStudents students={students} category={category} />
     </main>
   )
 }
