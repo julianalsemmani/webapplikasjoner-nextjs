@@ -15,7 +15,7 @@ const Home: NextPage = () => {
   const displayStudents = (students: Student[]) => {
     return (
       <ul>
-        {Object.values(students).map((student) => {
+        {students.map((student) => {
           return (
             <li key={student.id}>
               <span>
@@ -40,7 +40,7 @@ const Home: NextPage = () => {
         })
 
         const result = await response.json()
-        setStudents(result.data)
+        setStudents(Object.values(result.data))
       } catch (error) {
         console.log(error)
       }
