@@ -33,6 +33,7 @@ label {
   align-items: center;
   gap: 1rem;
 }
+
 ul {
   margin-bottom: 2rem;
 }
@@ -47,6 +48,7 @@ li {
     display: block;
     width: 100%;
     align-self: flex-start;
+    
     &:nth-child(1) {
       min-width: 150px;
     }
