@@ -1,15 +1,33 @@
-import { Student } from '../types/'
+import {Student} from '../types/'
+import {ReactNode} from "react";
+import GroupStudents from "./GroupStudents";
+import {GroupBy} from "../lib/groupBy";
 
 type DisplayStudentsProps = {
   students: Student[]
   category: string
 }
 
-export default function DisplayStudents({
-  students,
-  category,
-}: DisplayStudentsProps) {
-  const display = ({ students, category }: DisplayStudentsProps) => {
+export default function DisplayStudents({students, category}: DisplayStudentsProps) {
+  const display = ({students, category}: DisplayStudentsProps) => {
+    function populateStudents(students: Student[]): ReactNode {
+      return (
+        <ul>
+          {students.map((student) => {
+            return (
+              <li key={student.id}>
+                <span>{student.id}</span>
+                <span>{student.name}</span>
+                <span>{student.age}</span>
+                <span>{student.gender}</span>
+                <span>{student.group}</span>
+              </li>
+            )
+          })}
+        </ul>
+      )
+    }
+
     switch (category) {
       case 'ingen':
         students.sort((a, b) => {
@@ -24,60 +42,16 @@ export default function DisplayStudents({
           return 0
         })
 
-        return (
-          <ul>
-            {students.map((student) => {
-              return (
-                <li key={student.id}>
-                  <span>{student.id}</span>
-                  <span>{student.name}</span>
-                  <span>{student.age}</span>
-                  <span>{student.gender}</span>
-                  <span>{student.group}</span>
-                </li>
-              )
-            })}
-          </ul>
-        )
+        return populateStudents(students)
 
       case 'alder':
-        return (
-          <>
-            <h1>Gruppering etter {category}: GRUPPE HER</h1>
-
-            <ul>
-              <p>Display students sorted by age</p>
-            </ul>
-
-            <h2 className="count">Antall: {0}</h2>
-          </>
-        )
+        return (<GroupStudents students={students} category={GroupBy.age}/>)
 
       case 'kjønn':
-        return (
-          <>
-            <h1>Gruppering etter {category}: GRUPPE HER</h1>
-
-            <ul>
-              <p>Display students sorted by gender</p>
-            </ul>
-
-            <h2 className="count">Antall: {0}</h2>
-          </>
-        )
+        return (<GroupStudents students={students} category={GroupBy.gender}/>)
 
       case 'studieretning':
-        return (
-          <>
-            <h1>Gruppering etter {category}: GRUPPE HER</h1>
-
-            <ul>
-              <p>Display students sorted by class</p>
-            </ul>
-
-            <h2 className="count">Antall: {0}</h2>
-          </>
-        )
+        return (<GroupStudents students={students} category={GroupBy.group}/>)
 
       default:
         return (
@@ -88,5 +62,5 @@ export default function DisplayStudents({
     }
   }
 
-  return <>{display({ students, category })}</>
+  return <>{display({students, category})}</>
 }
