@@ -11,7 +11,7 @@ export default function DisplayStudents({
 }: DisplayStudentsProps) {
   const display = ({ students, category }: DisplayStudentsProps) => {
     switch (category) {
-      case 'nothing':
+      case 'ingen':
         students.sort((a, b) => {
           if (a.name < b.name) {
             return -1
@@ -25,62 +25,65 @@ export default function DisplayStudents({
         })
 
         return (
-          <div>
-            <ul>
-              {students.map((student) => {
-                return (
-                  <li key={student.id}>
-                    <span>{student.id}</span>
-                    <span>{student.name}</span>
-                    <span>{student.age}</span>
-                    <span>{student.gender}</span>
-                    <span>{student.group}</span>
-                  </li>
-                )
-              })}
-            </ul>
-            <h2 className='right-align'>Antall: {students.length}</h2>
-          </div>
+          <ul>
+            {students.map((student) => {
+              return (
+                <li key={student.id}>
+                  <span>{student.id}</span>
+                  <span>{student.name}</span>
+                  <span>{student.age}</span>
+                  <span>{student.gender}</span>
+                  <span>{student.group}</span>
+                </li>
+              )
+            })}
+          </ul>
         )
 
-      case 'age':
+      case 'alder':
         return (
-          <div>
+          <>
+            <h1>Gruppering etter {category}: GRUPPE HER</h1>
+
             <ul>
               <p>Display students sorted by age</p>
             </ul>
-            <h2 className='right-align'>Antall: {0}</h2>
-          </div>
+
+            <h2 className="count">Antall: {0}</h2>
+          </>
         )
 
-      case 'gender':
+      case 'kjønn':
         return (
-          <div>
+          <>
+            <h1>Gruppering etter {category}: GRUPPE HER</h1>
+
             <ul>
               <p>Display students sorted by gender</p>
             </ul>
-            <h2 className='right-align'>Antall: {0}</h2>
-          </div>
+
+            <h2 className="count">Antall: {0}</h2>
+          </>
         )
 
-      case 'class':
+      case 'klasse':
         return (
-          <div>
+          <>
+            <h1>Gruppering etter {category}: GRUPPE HER</h1>
+
             <ul>
               <p>Display students sorted by class</p>
             </ul>
-            <h2 className='right-align'>Antall: {0}</h2>
-          </div>
+
+            <h2 className="count">Antall: {0}</h2>
+          </>
         )
 
       default:
         return (
-          <div>
-            <ul>
-              <p>Category not recognized</p>
-            </ul>
-            <h2 className='right-align'>Antall: {0}</h2>
-          </div>
+          <ul>
+            <p>Category not recognized</p>
+          </ul>
         )
     }
   }
