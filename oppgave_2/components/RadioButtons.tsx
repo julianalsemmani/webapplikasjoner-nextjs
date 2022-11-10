@@ -34,12 +34,12 @@ export default function RadioButtons({ handleChange }: RadioButtonsProps) {
         onChange={handleChange}
       />
 
-      <label htmlFor="klasse">Klasse</label>
+      <label htmlFor="studieretning">Klasse</label>
       <input
         type="radio"
-        id="klasse"
+        id="studieretning"
         name="sortBy"
-        value="klasse"
+        value="studieretning"
         onChange={handleChange}
       />
     </section>

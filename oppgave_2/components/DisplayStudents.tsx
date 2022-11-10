@@ -66,7 +66,7 @@ export default function DisplayStudents({
           </>
         )
 
-      case 'klasse':
+      case 'studieretning':
         return (
           <>
             <h1>Gruppering etter {category}: GRUPPE HER</h1>
