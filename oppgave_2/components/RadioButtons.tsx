@@ -7,39 +7,39 @@ type RadioButtonsProps = {
 export default function RadioButtons({ handleChange }: RadioButtonsProps) {
   return (
     <section>
-      <label htmlFor="nothing">Ingen</label>
+      <label htmlFor="ingen">Ingen</label>
       <input
         type="radio"
-        id="nothing"
+        id="ingen"
         name="sortBy"
-        value="nothing"
+        value="ingen"
         onChange={handleChange}
       />
 
-      <label htmlFor="age">Alder</label>
+      <label htmlFor="alder">Alder</label>
       <input
         type="radio"
-        id="age"
+        id="alder"
         name="sortBy"
-        value="age"
+        value="alder"
         onChange={handleChange}
       />
 
-      <label htmlFor="gender">Kjønn</label>
+      <label htmlFor="kjønn">Kjønn</label>
       <input
         type="radio"
-        id="gender"
+        id="kjønn"
         name="sortBy"
-        value="gender"
+        value="kjønn"
         onChange={handleChange}
       />
 
-      <label htmlFor="class">Klasse</label>
+      <label htmlFor="klasse">Klasse</label>
       <input
         type="radio"
-        id="class"
+        id="klasse"
         name="sortBy"
-        value="class"
+        value="klasse"
         onChange={handleChange}
       />
     </section>
