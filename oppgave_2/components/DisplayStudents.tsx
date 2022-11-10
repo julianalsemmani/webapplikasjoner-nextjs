@@ -11,7 +11,7 @@ export default function DisplayStudents({
 }: DisplayStudentsProps) {
   const display = ({ students, category }: DisplayStudentsProps) => {
     switch (category) {
-      case 'nothing':
+      case 'ingen':
         students.sort((a, b) => {
           if (a.name < b.name) {
             return -1
@@ -40,25 +40,43 @@ export default function DisplayStudents({
           </ul>
         )
 
-      case 'age':
+      case 'alder':
         return (
-          <ul>
-            <p>Display students sorted by age</p>
-          </ul>
+          <>
+            <h1>Gruppering etter {category}: GRUPPE HER</h1>
+
+            <ul>
+              <p>Display students sorted by age</p>
+            </ul>
+
+            <h2 className="count">Antall: {0}</h2>
+          </>
         )
 
-      case 'gender':
+      case 'kjønn':
         return (
-          <ul>
-            <p>Display students sorted by gender</p>
-          </ul>
+          <>
+            <h1>Gruppering etter {category}: GRUPPE HER</h1>
+
+            <ul>
+              <p>Display students sorted by gender</p>
+            </ul>
+
+            <h2 className="count">Antall: {0}</h2>
+          </>
         )
 
-      case 'class':
+      case 'studieretning':
         return (
-          <ul>
-            <p>Display students sorted by class</p>
-          </ul>
+          <>
+            <h1>Gruppering etter {category}: GRUPPE HER</h1>
+
+            <ul>
+              <p>Display students sorted by class</p>
+            </ul>
+
+            <h2 className="count">Antall: {0}</h2>
+          </>
         )
 
       default:
