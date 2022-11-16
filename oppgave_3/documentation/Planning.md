@@ -24,25 +24,25 @@
 # 3. Skal til hvert api-endepunkt dokumentere responsen og statuskoden for de ulike verbene. Hva slags data skal returneres når det går riktig / feil. #
 - ***api/employees/*** <br />
 → ‘GET’: *“ status: 200, data: employees ”* <br />
-→ ‘POST’: *“ status: 201, message: ‘ CREATED MESSAGE ’ ”* <br />
-→ ‘PUT’: *“ status: 200, message: ‘ CREATED/UPDATED MESSAGE ’ ”*<br />
+→ ‘POST’: *“ status: 201, message: ‘ CREATED MESSAGE ’ ”, data: employee* <br />
+→ ‘PUT’: *“ status: 200, message: ‘ CREATED/UPDATED MESSAGE ’ ”, data: employee*<br />
 
 - ***api/employees/[id]*** <br />
 → ‘GET’: *“ status: 200, data: employees ”* <br />
-→ ‘POST’: *“ status: 201, message: ‘ CREATED MESSAGE ’ ”* <br />
-→ ‘PUT’: *“ status: 200, message: ‘ CREATED/UPDATED MESSAGE ’ ”*<br />
+→ ‘POST’: *“ status: 201, message: ‘ CREATED MESSAGE ’ ”, data: employee* <br />
+→ ‘PUT’: *“ status: 200, message: ‘ CREATED/UPDATED MESSAGE ’ ”, data: employee*<br />
 
 - ***api/weeks/*** <br />
-→ ‘GET’: *“ status: 200, data: employees ”* <br />
-→ ‘POST’: *“ status: 201, message: ‘ CREATED MESSAGE ’ ”* <br />
+→ ‘GET’: *“ status: 200, data: weeks ”* <br />
+→ ‘POST’: *“ status: 201, message: ‘ CREATED MESSAGE ’ ”, data: week* <br />
 
 - ***api/weeks/[id]*** <br />
-→ ‘GET’: *“ status: 200, data: employees ”* <br />
-→ ‘POST’: *“ status: 201, message: ‘ CREATED MESSAGE ’ ”* <br />
+→ ‘GET’: *“ status: 200, data: weeks ”* <br />
+→ ‘POST’: *“ status: 201, message: ‘ CREATED MESSAGE ’ ”, data: week* <br />
 
 - ***api/years*** <br />
-→ ‘GET’: *“ status: 200, data: employees ”* <br />
-→ ‘POST’: *“ status: 201, message: ‘ CREATED MESSAGE ’ ”* <br />
+→ ‘GET’: *“ status: 200, data: years ”* <br />
+→ ‘POST’: *“ status: 201, message: ‘ CREATED MESSAGE ’ ”, data: year* <br />
 
 - ***FELLES ERROR*** <br />
 → ‘ERROR 405’: *“ status: 405, data: ' Method not allowed ' ”* <br />
