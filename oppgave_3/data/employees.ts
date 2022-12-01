@@ -1,4 +1,9 @@
-export const employees = [
+type Employees = {
+  id: number,
+  name: string,
+  rules: string
+}
+export const employees: Employees[] = [
   {
     id: 1,
     name: 'Trude',
