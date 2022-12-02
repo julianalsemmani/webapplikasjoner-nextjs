@@ -1,10 +1,11 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { Day, Week } from '../../../types'
 
 export default function Weeks() {
   const router = useRouter()
-  const [week, setWeek] = useState<any>([])
+  const [week, setWeek] = useState<Week[]>([])
 
   useEffect(() => {
     const weekId = router.query.id
@@ -37,7 +38,7 @@ export default function Weeks() {
       <Link href={`/`}>Gå tilbake</Link>
       <p>Listen er kommentert ut, se discord for problemet</p>
       {/* <ul key={week.week}>
-        {week.day.map((day: any) => {
+        {week.day.map((day: Day) => {
           return (
             <li key={day.id}>
               <span>{day.name}</span>

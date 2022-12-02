@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { Day, Week } from '../types'
 
 export default function WeekCards() {
-  const [weeks, setWeeks] = useState<any>([])
+  const [weeks, setWeeks] = useState<Week[]>([])
   const [toggle, setToggle] = useState<any>({})
 
-  function toggleFunction(id: any) {
+  function toggleFunction(id: string) {
     setToggle({
       ...toggle,
       [id]: !toggle[id],
@@ -24,7 +25,7 @@ export default function WeekCards() {
 
         const data = await response.json()
 
-        setWeeks(data.data)
+        setWeeks(Object.values(data.data))
       } catch (error) {
         console.log(error)
       }
@@ -35,7 +36,7 @@ export default function WeekCards() {
 
   return (
     <>
-      {weeks.map((week: any) => {
+      {weeks.map((week: Week) => {
         return (
           <>
             <section>
@@ -50,7 +51,7 @@ export default function WeekCards() {
                 key={week.id}
                 style={{ display: toggle[week.id] ? 'block' : 'none' }}
               >
-                {week.day.map((day: any) => {
+                {week.day.map((day: Day) => {
                   return (
                     <>
                       <li key={day.name}>

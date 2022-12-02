@@ -1,9 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '../../../lib/db'
+import { Result } from '../../../types'
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<any>
+  res: NextApiResponse<Result>
 ) {
   switch (req.method?.toLowerCase()) {
     case 'get':
@@ -17,10 +18,10 @@ export default async function handler(
         },
       })
 
-      return res.status(200).json({ status: true, data: weeks })
+      return res.status(200).json({ status: true, data: { ...weeks } })
     default:
       return res.status(405).json({
-        success: false,
+        status: false,
         error: 'Method not allowed',
       })
   }
