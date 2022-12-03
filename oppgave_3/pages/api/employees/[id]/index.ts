@@ -36,6 +36,20 @@ export default async function handler(
           .json({ status: false, error: 'Employee not found' })
 
       return res.status(200).json({ status: true, data: employee })
+
+    case 'put':
+      // TODO: FIX TYPO IN PRISMA SCHEMA
+      // TODO: FIX PUT REQUEST
+      const updatedEmployee = await prisma.emploee.update({
+        where: {
+          id,
+        },
+        data: {
+          name: req.body.name,
+        },
+      })
+
+      return res.status(201).json({ status: true, data: {} })
     default:
       return res.status(405).json({
         status: false,
