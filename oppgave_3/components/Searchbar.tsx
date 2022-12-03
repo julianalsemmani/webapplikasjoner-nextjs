@@ -1,27 +1,36 @@
 import { useState } from 'react'
 import { Employee } from '../types'
+import { getEmployeeByName, getEmployeeById } from '../api/employees'
+import { useRouter } from 'next/router'
 
 export default function SearchBar() {
   const [name, setName] = useState<string>('')
   const [status, setStatus] = useState('idle')
-  const [employee, setEmployee] = useState<Employee>()
+  // const [employee, setEmployee] = useState<Employee>()
 
   const isLoading = status === 'loading'
   const isError = status === 'error'
   const isSuccess = status === 'success'
 
-  const handleSubmit = (event: any) => {
+  const router = useRouter()
+
+  const handleSubmit = async (event: any) => {
     event.preventDefault()
     setStatus('loading')
 
-    // Check if employee exists by using function that returns an employee using name
-    // --> if (getEmployee)
-    // --> setEmployee(getEmployee)
-    // --> setStatus('success')
-    // --> Redirect to employee page = /employees/${employee.id}
-
-    // --> else setStatus('error')
-    // --> "Employee not found"
+    try {
+      const result = await getEmployeeByName(name)
+      // const result = await getEmployeeById('clb6vybl50000v7q0jv2mz3z1')
+      setStatus('success')
+      // console.log(result)
+      router.push(`/employees/${result?.data.id}`)
+    } catch (error) {
+      setStatus('error')
+      console.log(error)
+      setTimeout(() => {
+        setStatus('idle')
+      }, 2000)
+    }
   }
 
   if (isLoading) {
@@ -29,7 +38,7 @@ export default function SearchBar() {
   }
 
   if (isError) {
-    return <p>Noe gikk galt ...</p>
+    return <p>Fant ikke ansatt ...</p>
   }
 
   return (
