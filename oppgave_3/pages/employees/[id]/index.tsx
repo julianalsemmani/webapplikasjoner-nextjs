@@ -32,8 +32,6 @@ export default function Employee() {
     handler()
   }, [router.query])
 
-  console.log(JSON.stringify(employee, null, 2))
-
   return (
     <>
       <Navbar />
