@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { Day, Week } from '../../../types'
+import type { Day, Week } from '../../../types'
 import Navbar from '../../../components/Navbar'
 
-export default function Weeks() {
+export default function Week() {
   const router = useRouter()
   const [week, setWeek] = useState<Week>()
 
@@ -41,10 +41,14 @@ export default function Weeks() {
       <ul key={week?.week}>
         {week?.day.map((day: Day) => {
           return (
-            <li key={day.id}>
-              <span>{day.name}</span>
-              <span>{day.employee.name}</span>
-            </li>
+            <>
+              <li key={day.id}>
+                <span>{day.name}</span>{' '}
+                <Link href={`/employees/${day.employee.id}`}>
+                  {day.employee.name}
+                </Link>
+              </li>
+            </>
           )
         })}
       </ul>
