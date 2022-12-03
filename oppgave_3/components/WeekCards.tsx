@@ -54,9 +54,11 @@ export default function WeekCards() {
                 {week.day.map((day: Day) => {
                   return (
                     <>
-                      <li key={day.name}>
-                        <span>{day.name}</span>
-                        <span>{day.employee.name}</span>
+                      <li key={day.id}>
+                        <span>{day.name}</span>{' '}
+                        <Link href={`/employees/${day.employee.id}`}>
+                          {day.employee.name}
+                        </Link>
                       </li>
                     </>
                   )
