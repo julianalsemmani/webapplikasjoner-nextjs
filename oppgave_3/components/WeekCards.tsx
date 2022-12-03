@@ -63,7 +63,9 @@ export default function WeekCards() {
                     </>
                   )
                 })}
-                <button onClick={() => setToggle(false)}>Lukk dager</button>
+                <button onClick={() => toggleFunction(week.id)}>
+                  Lukk dager
+                </button>
               </ul>
             </section>
           </>
