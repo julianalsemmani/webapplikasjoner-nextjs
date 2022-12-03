@@ -10,7 +10,8 @@ export const getEmployeeById = (id: string) => {
 }
 
 export const getEmployeeByName = (name: string) => {
-  name.toLowerCase()
+  // TODO: transform name
+  // name.toLowerCase()
 
   return fetcher(`${EMPLOYEES_URL}/name/${name}`, {
     method: 'GET',

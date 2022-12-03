@@ -9,12 +9,12 @@ const Home: NextPage = () => {
   useEffect(() => {
     const handler = async () => {
       try {
-        const reponse = await fetch('/api/demo', {
-          method: 'get',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        })
+        // const reponse = await fetch('/api/demo', {
+        //   method: 'get',
+        //   headers: {
+        //     'Content-Type': 'application/json',
+        //   },
+        // })
       } catch (error) {
         console.error(error)
       }

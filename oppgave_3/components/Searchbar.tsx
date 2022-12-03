@@ -1,7 +1,7 @@
-import { useState } from 'react'
-import { Employee } from '../types'
-import { getEmployeeByName, getEmployeeById } from '../api/employees'
-import { useRouter } from 'next/router'
+import {useState} from 'react'
+import {Employee} from '../types'
+import {getEmployeeByName, getEmployeeById} from '../api/employees'
+import {useRouter} from 'next/router'
 
 export default function SearchBar() {
   const [name, setName] = useState<string>('')
@@ -20,10 +20,12 @@ export default function SearchBar() {
 
     try {
       const result = await getEmployeeByName(name)
-      // const result = await getEmployeeById('clb6vybl50000v7q0jv2mz3z1')
       setStatus('success')
-      // console.log(result)
-      router.push(`/employees/${result?.data.id}`)
+      console.log(result)
+      if (result.success && result.data.length === 1) {
+        await router.push(`/employees/${result?.data[0].id}`)
+      }
+
     } catch (error) {
       setStatus('error')
       console.log(error)
