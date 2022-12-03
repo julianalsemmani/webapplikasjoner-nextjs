@@ -36,9 +36,8 @@ export default function Weeks() {
       <h1>Lunsjkalender</h1>
       <h2>Uke {week.week}</h2>
       <Link href={`/`}>Gå tilbake</Link>
-      <p>Listen er kommentert ut, se discord for problemet</p>
-      {/* <ul key={week.week}>
-        {week.day.map((day: Day) => {
+      <ul key={week.week}>
+        {week.day?.map((day: Day) => {
           return (
             <li key={day.id}>
               <span>{day.name}</span>
@@ -46,7 +45,7 @@ export default function Weeks() {
             </li>
           )
         })}
-      </ul> */}
+      </ul>
     </>
   )
 }
