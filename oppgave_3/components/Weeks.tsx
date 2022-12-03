@@ -31,7 +31,7 @@ export default function Weeks() {
         return (
           <>
             <h3>{year.name}</h3>
-            <ul key={year.name}>
+            <ul key={year.name} className="weeks">
               {year.week.map((week: Week) => {
                 return (
                   <li key={week.id}>

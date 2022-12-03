@@ -40,33 +40,74 @@ export default function WeekCards() {
         return (
           <>
             <section>
-              <h2>Uke {week.week}</h2>
+              <h2 className="week-cards-title">Uke {week.week}</h2>
               <button
                 onClick={() => toggleFunction(week.id)}
-                style={{ display: toggle[week.id] ? 'none' : 'block' }}
+                style={{ display: toggle[week.id] ? 'none' : '' }}
+                className="week-cards-button"
               >
                 Se dager
               </button>
-              <ul
+
+              <table
+                className="table-style"
                 key={week.id}
-                style={{ display: toggle[week.id] ? 'block' : 'none' }}
+                style={{ display: toggle[week.id] ? '' : 'none' }}
               >
-                {week.day.map((day: Day) => {
-                  return (
-                    <>
-                      <li key={day.id}>
-                        <span>{day.name}</span>{' '}
-                        <Link href={`/employees/${day.employee.id}`}>
-                          {day.employee.name}
-                        </Link>
-                      </li>
-                    </>
-                  )
-                })}
-                <button onClick={() => toggleFunction(week.id)}>
-                  Lukk dager
-                </button>
-              </ul>
+                <thead>
+                  <tr>
+                    <th>Mandag</th>
+                    <th>Tirsdag</th>
+                    <th>Onsdag</th>
+                    <th>Torsdag</th>
+                    <th>Fredag</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    {week.day.map((day: Day) => {
+                      return (
+                        <>
+                          {/* TODO: FIX HERE*/}
+                          {day.id == null ? (
+                            <td className="utilgjengelig">Utilgjengelig</td>
+                          ) : (
+                            <td key={day.id}>
+                              <Link href={`/employees/${day.employee.id}`}>
+                                {day.employee.name}
+                              </Link>
+                            </td>
+                          )}
+                        </>
+                      )
+                    })}
+                  </tr>
+                  <button
+                    onClick={() => toggleFunction(week.id)}
+                    className="week-cards-button"
+                  >
+                    Lukk dager
+                  </button>
+                </tbody>
+                {/* <ul>
+                  {week.day.map((day: Day) => {
+                    return (
+                      <>
+                        <li key={day.id}>
+                          <span>{day.name}</span>{' '}
+                          <Link href={`/employees/${day.employee.id}`}>
+                            {day.employee.name}
+                          </Link>
+                        </li>
+                      </>
+                    )
+                  })}
+                  <button onClick={() => toggleFunction(week.id)}>
+                    Lukk dager
+                  </button>
+                </ul> */}
+              </table>
             </section>
           </>
         )
