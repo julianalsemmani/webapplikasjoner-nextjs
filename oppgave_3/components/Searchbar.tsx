@@ -1,7 +1,7 @@
-import {useState} from 'react'
-import {Employee} from '../types'
-import {getEmployeeByName, getEmployeeById} from '../api/employees'
-import {useRouter} from 'next/router'
+import { useState } from 'react'
+import { Employee } from '../types'
+import { getEmployeeByName, getEmployeeById } from '../api/employees'
+import { useRouter } from 'next/router'
 
 export default function SearchBar() {
   const [name, setName] = useState<string>('')
@@ -25,7 +25,6 @@ export default function SearchBar() {
       if (result.success && result.data.length === 1) {
         await router.push(`/employees/${result?.data[0].id}`)
       }
-
     } catch (error) {
       setStatus('error')
       console.log(error)
@@ -44,13 +43,17 @@ export default function SearchBar() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <button type="submit">Søk</button>
-    </form>
+    <>
+      <h2>Søk på en ansatt:</h2>
+
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <button type="submit">Søk</button>
+      </form>
+    </>
   )
 }
