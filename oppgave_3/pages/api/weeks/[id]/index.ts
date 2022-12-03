@@ -30,7 +30,10 @@ export default async function handler(
       })
 
       if (!week)
-        return res.status(404).json({ status: false, error: 'Week not found' })
+        return res.status(404).json({
+          status: false,
+          error: 'Week not found',
+        })
 
       return res.status(200).json({ status: true, data: week })
     default:
