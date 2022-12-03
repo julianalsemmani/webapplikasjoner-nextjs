@@ -4,7 +4,7 @@ import { Day, Week } from '../types'
 
 export default function WeekCards() {
   const [weeks, setWeeks] = useState<Week[]>([])
-  const [toggle, setToggle] = useState<any>({})
+  const [toggle, setToggle] = useState<Record<string, boolean>>({})
 
   function toggleFunction(id: string) {
     setToggle({
