@@ -34,11 +34,36 @@ export default function Employee() {
 
   return (
     <>
-      <Navbar />
-      <h1>
-        Ansatt: {employee?.name} | ID: {employee?.id}
-      </h1>
-      {employee?.day.map((day: Day) => {
+      <main>
+        <Navbar />
+        <h1>
+          Ansatt: {employee?.name} | ID: {employee?.id}
+        </h1>
+        <table className="table-style" key={employee?.id}>
+          <thead>
+            <tr>
+              <th>Uke</th>
+              <th>Dag</th>
+              <th>Navn</th>
+            </tr>
+          </thead>
+          <tbody>
+            {employee?.day.map((day: Day) => {
+              return (
+                <tr key={day.weekId}>
+                  <td>
+                    <Link href={`/weeks/${day.week.id}`}>{day.week.week}</Link>
+                  </td>
+                  <td>{day.name}</td>
+                  <td>{employee.name}</td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      </main>
+
+      {/* {employee?.day.map((day: Day) => {
         return (
           <section key={day.id}>
             <ul>
@@ -53,7 +78,7 @@ export default function Employee() {
             </ul>
           </section>
         )
-      })}
+      })} */}
     </>
   )
 }

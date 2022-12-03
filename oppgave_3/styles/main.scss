@@ -4,3 +4,128 @@ main {
   max-width: 760px;
   margin: 0 auto;
 }
+
+/* Weeks-component */
+.weeks {
+  display: flex;
+  flex-wrap: wrap;
+  border-bottom: grey solid;
+}
+
+.weeks li {
+  background-color: #4CAF50;
+  display: flex;
+  margin: 5px;
+  height: 30px;
+  width: 30px;
+  justify-content: center;
+  align-items: center;
+}
+
+.weeks li a {
+  color: white;
+  padding: 10px;
+}
+
+.weeks li a:hover {
+  color: #4CAF50;
+  background-color: white;
+  text-decoration: none;
+}
+
+/* WeekCards-component */
+.week-cards-title {
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+section {
+  margin-top: 25px;
+  margin-bottom: 25px;
+  border: 1px solid black;
+}
+
+.week-cards-button {
+  margin: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.week-cards-button:hover {
+  text-decoration: underline;
+  color: #4CAF50;
+  background-color: white;
+  transition: 0.3s ease;
+}
+
+/* Tables */
+
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgb(185, 232, 181);
+  transition: 0.3s ease;
+}
+
+.utilgjengelig {
+  color: red;
+}
+
+.table-style {
+  border-collapse: collapse;
+  width: 100%;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.table-style th {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px;
+}
+
+.table-style tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.table-style tr td {
+  padding: 15px;
+}
+
+.table-style tr td:hover {
+  background-color: #ddd;
+}
+
+/* Navbar */
+nav {
+  background-color: #ddd;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: right;
+  padding: 0 20px;
+  margin: 0 0 30px 0;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+}
+
+nav ul li {
+  margin-left: 20px;
+}
+
+nav a {
+  color: #000;
+  text-decoration: none;
+  font-size: 1.5rem;
+}
