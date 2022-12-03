@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import Weeks from '../components/Weeks'
 import WeekCards from '../components/WeekCards'
 import Navbar from '../components/Navbar'
+import Searchbar from '../components/Searchbar'
 
 const Home: NextPage = () => {
   useEffect(() => {
@@ -26,6 +27,7 @@ const Home: NextPage = () => {
     <main>
       <h1>Lunsjkalender</h1>
       <Navbar />
+      <Searchbar />
       <Weeks />
       <WeekCards />
     </main>
