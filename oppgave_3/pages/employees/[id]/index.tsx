@@ -38,7 +38,7 @@ export default function Employee() {
     <>
       <Navbar />
       <h1>
-        {employee?.name} | ID: {employee?.id}
+        Ansatt: {employee?.name} | ID: {employee?.id}
       </h1>
       {employee?.day.map((day: Day) => {
         return (
