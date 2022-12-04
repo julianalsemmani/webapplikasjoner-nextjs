@@ -8,7 +8,7 @@ export default function Navbar() {
           <Link href={'/'}>Hjem</Link>
         </li>
         <li>
-          <Link href={'/'}>Legg til ansatt</Link>
+          <Link href={'/employees/create'}>Legg til ansatt</Link>
         </li>
         <li>
           <Link href={'/employees'}>Ansattliste</Link>
