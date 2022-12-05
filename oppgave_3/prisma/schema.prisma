@@ -11,7 +11,7 @@ generator dbml {
   provider = "prisma-dbml-generator"
 }
 
-model Emploee {
+model Employee {
   id            String  @id @unique @default(cuid())
   employeeNum   Int     @unique
   name          String
@@ -22,7 +22,7 @@ model Emploee {
 model Day {
   id            String  @id @default(cuid())
   name          String
-  employee      Emploee @relation(fields: [employeeNum], references: [employeeNum])
+  employee      Employee @relation(fields: [employeeNum], references: [employeeNum])
   employeeNum   Int
   week          Week    @relation(fields: [weekId], references: [id])
   weekId        String

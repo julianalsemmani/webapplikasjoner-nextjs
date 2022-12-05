@@ -1,5 +1,5 @@
-import type {NextPage} from 'next'
-import {useEffect, useState} from 'react'
+import type { NextPage } from 'next'
+import { useEffect, useState } from 'react'
 import Weeks from '../components/Weeks'
 import WeekCards from '../components/WeekCards'
 import Navbar from '../components/Navbar'
@@ -9,15 +9,13 @@ export interface WeeksProps {
   filterWeeks: (from: number, to: number) => void
 }
 
-
 export type Filter = {
-  from: number,
+  from: number
   to: number
 }
 
 const Home: NextPage = () => {
-  const [filter, setFilter] = useState<Filter>({from: 0, to: 0})
-
+  const [filter, setFilter] = useState<Filter>({ from: 0, to: 0 })
 
   useEffect(() => {
     const handler = async () => {
@@ -38,17 +36,17 @@ const Home: NextPage = () => {
 
   function handleFilter(from: number, to: number) {
     console.log(`From: ${from}; to: ${to}`)
-    const filterObj: Filter = {from, to}
+    const filterObj: Filter = { from, to }
     setFilter(filterObj)
   }
 
   return (
     <main>
       <h1>Lunsjkalender</h1>
-      <Navbar/>
-      <Searchbar/>
-      <Weeks filterWeeks={handleFilter}/>
-      <WeekCards from={filter.from} to={filter.to}/>
+      <Navbar />
+      <Searchbar />
+      <Weeks filterWeeks={handleFilter} />
+      <WeekCards from={filter.from} to={filter.to} />
     </main>
   )
 }

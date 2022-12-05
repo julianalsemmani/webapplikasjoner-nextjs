@@ -8,8 +8,7 @@ export default async function handler(
 ) {
   switch (req.method?.toLowerCase()) {
     case 'get':
-      // TODO: FIX TYPO IN PRISMA SCHEMA "EMPLOEE" -> "EMPLOYEE"
-      const employees = await prisma.emploee.findMany({
+      const employees = await prisma.employee.findMany({
         include: {
           day: {
             include: {

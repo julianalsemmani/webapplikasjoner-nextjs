@@ -1,5 +1,5 @@
 -- CreateTable
-CREATE TABLE "Emploee" (
+CREATE TABLE "Employee" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "employeeNum" INTEGER NOT NULL,
     "name" TEXT NOT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE "Day" (
     "name" TEXT NOT NULL,
     "employeeNum" INTEGER NOT NULL,
     "weekId" TEXT NOT NULL,
-    CONSTRAINT "Day_employeeNum_fkey" FOREIGN KEY ("employeeNum") REFERENCES "Emploee" ("employeeNum") ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT "Day_employeeNum_fkey" FOREIGN KEY ("employeeNum") REFERENCES "Employee" ("employeeNum") ON DELETE RESTRICT ON UPDATE CASCADE,
     CONSTRAINT "Day_weekId_fkey" FOREIGN KEY ("weekId") REFERENCES "Week" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
@@ -31,10 +31,10 @@ CREATE TABLE "Year" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Emploee_id_key" ON "Emploee"("id");
+CREATE UNIQUE INDEX "Employee_id_key" ON "Employee"("id");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Emploee_employeeNum_key" ON "Emploee"("employeeNum");
+CREATE UNIQUE INDEX "Employee_employeeNum_key" ON "Employee"("employeeNum");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Year_name_key" ON "Year"("name");

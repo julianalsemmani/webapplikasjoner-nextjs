@@ -2,7 +2,7 @@
 //// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 //// ------------------------------------------------------
 
-Table Emploee {
+Table Employee {
   id String [pk, unique]
   employeeNum Int [unique, not null]
   name String [not null]
@@ -13,7 +13,7 @@ Table Emploee {
 Table Day {
   id String [pk]
   name String [not null]
-  employee Emploee [not null]
+  employee Employee [not null]
   employeeNum Int [not null]
   week Week [not null]
   weekId String [not null]
@@ -33,7 +33,7 @@ Table Year {
   week Week [not null]
 }
 
-Ref: Day.employeeNum > Emploee.employeeNum
+Ref: Day.employeeNum > Employee.employeeNum
 
 Ref: Day.weekId > Week.id
 

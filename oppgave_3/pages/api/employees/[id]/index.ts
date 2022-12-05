@@ -16,8 +16,7 @@ export default async function handler(
       if (!id)
         return res.status(400).json({ status: false, error: 'Id is missing' })
 
-      // TODO: FIX TYPO IN PRISMA SCHEMA
-      const employee = await prisma.emploee.findUnique({
+      const employee = await prisma.employee.findUnique({
         include: {
           day: {
             include: {
@@ -39,7 +38,7 @@ export default async function handler(
 
     case 'put':
       const { id: Id, ...data } = req.body
-      const updatedEmployee = await prisma.emploee.update({
+      const updatedEmployee = await prisma.employee.update({
         where: {
           id: Id,
         },
