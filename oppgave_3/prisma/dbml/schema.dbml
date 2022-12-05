@@ -1,0 +1,40 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table Employee {
+  id String [pk, unique]
+  employeeNum Int [unique, not null]
+  name String [not null]
+  rules String [not null]
+  day Day [not null]
+}
+
+Table Day {
+  id String [pk]
+  name String [not null]
+  employee Employee [not null]
+  employeeNum Int [not null]
+  week Week [not null]
+  weekId String [not null]
+}
+
+Table Week {
+  id String [pk]
+  week Int [not null]
+  day Day [not null]
+  year Year [not null]
+  yearId String [not null]
+}
+
+Table Year {
+  id String [pk]
+  name String [unique, not null]
+  week Week [not null]
+}
+
+Ref: Day.employeeNum > Employee.employeeNum
+
+Ref: Day.weekId > Week.id
+
+Ref: Week.yearId > Year.id
