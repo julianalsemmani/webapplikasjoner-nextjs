@@ -32,6 +32,7 @@ export default function Employees() {
       <main>
         <Navbar />
         <h1>Ansattliste:</h1>
+        {/* FIXME: Better key? */}
         <table className="table-style" key={2}>
           <thead>
             <tr>
@@ -39,30 +40,21 @@ export default function Employees() {
               <th>Ansattnummer</th>
               <th>Navn</th>
               <th>Regler</th>
+              <th>Handling</th>
             </tr>
           </thead>
           <tbody>
             {employees.map((employee: Employee) => {
               return (
                 <tr key={employee.id}>
+                  <td>{employee.id}</td>
+                  <td>{employee.employeeNum}</td>
+                  <td>{employee.name}</td>
+                  <td>{employee.rules}</td>
                   <td>
-                    <Link href={`/employees/${employee.id}`}>
-                      {employee.id}
-                    </Link>
-                  </td>
-                  <td>
-                    <Link href={`/employees/${employee.id}`}>
-                      {employee.employeeNum}
-                    </Link>
-                  </td>
-                  <td>
-                    <Link href={`/employees/${employee.id}`}>
-                      {employee.name}
-                    </Link>
-                  </td>
-                  <td>
-                    <Link href={`/employees/${employee.id}`}>
-                      {employee.rules}
+                    <Link href={`/employees/${employee.id}`}>Se ansatt</Link> /{' '}
+                    <Link href={`/employees/${employee.id}/update`}>
+                      Oppdater
                     </Link>
                   </td>
                 </tr>

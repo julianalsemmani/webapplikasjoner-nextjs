@@ -9,28 +9,45 @@ import { getEmployeeById } from '../../../api/employees'
 export default function Employees() {
   const [name, setName] = useState<string>('')
   const [status, setStatus] = useState('idle')
-  const [Id, setId] = useState<string>('')
+  const [employee, setEmployee] = useState<Employee>()
 
   const isLoading = status === 'loading'
   const isError = status === 'error'
 
   const router = useRouter()
-  
+
   useEffect(() => {
-    setId(String(router.query.id));
-  })
+    const handler = async () => {
+      try {
+        // FIXME: See browser console for error
+        const response = await fetch(`/api/employees/${router.query.id}`, {
+          method: 'get',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+
+        const data = await response.json()
+        setEmployee(data.data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    handler()
+  }, [router.query.id])
 
   const handleSubmit = async (event: any) => {
     event.preventDefault()
     setStatus('loading')
 
     try {
-      const response = await fetch(`/api/employees/${Id}`, {
+      const response = await fetch(`/api/employees/${employee?.id}`, {
         method: 'put',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ id: String(Id), name: String(name) }),
+        body: JSON.stringify({ id: String(employee?.id), name: String(name) }),
       })
 
       const data = await response.json()
@@ -56,7 +73,26 @@ export default function Employees() {
     <>
       <main>
         <Navbar />
-        <h2>Oppdater navn til ansatt med Id: {Id}</h2>
+        <h1>Ansattinformasjon:</h1>
+        <table className="table-style" key={2}>
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Ansattnummer</th>
+              <th>Navn</th>
+              <th>Regler</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr key={employee?.id}>
+              <td>{employee?.id}</td>
+              <td>{employee?.employeeNum}</td>
+              <td>{employee?.name}</td>
+              <td>{employee?.rules}</td>
+            </tr>
+          </tbody>
+        </table>
+
         <form onSubmit={handleSubmit}>
           <label htmlFor="name">Nytt Navn:</label>
           <input

@@ -10,21 +10,21 @@ export default async function handler(
 ) {
   switch (req.method?.toLowerCase()) {
     case 'post':
-        try {
-            const { employeeNum, name, rules } = req.body
-            const employee = await prisma.emploee.create({
-                data: {
-                    id: randomUUID(),
-                    employeeNum: parseInt(employeeNum),
-                    name,
-                    rules
-                },
-            })
-            res.status(200).json({ data: { employee }, status: true })
-            // console.log( { employee })
-        } catch (error) {
-            console.log(error)
-            res.status(400).json({ error: 'Not able to create', status: false })
-        }
-    }
+      try {
+        const { employeeNum, name, rules } = req.body
+        const employee = await prisma.employee.create({
+          data: {
+            id: randomUUID(),
+            employeeNum: parseInt(employeeNum),
+            name,
+            rules,
+          },
+        })
+        res.status(200).json({ data: { employee }, status: true })
+        // console.log( { employee })
+      } catch (error) {
+        console.log(error)
+        res.status(400).json({ error: 'Not able to create', status: false })
+      }
+  }
 }

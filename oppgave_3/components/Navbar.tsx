@@ -13,9 +13,6 @@ export default function Navbar() {
         <li>
           <Link href={'/employees'}>Ansattliste</Link>
         </li>
-        <li>
-          <Link href={'/employees/update'}>Oppdater ansatte</Link>
-        </li>
       </ul>
     </nav>
   )
