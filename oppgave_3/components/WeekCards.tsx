@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect, ReactNode} from 'react'
 import Link from 'next/link'
 import {Day, Week} from '../types'
 import {Filter} from "../pages";
@@ -44,6 +44,24 @@ export default function WeekCards({from, to}: Filter) {
 
   }, [from, to])
 
+  function renderDays(days: (Day | null)[]): ReactNode {
+    if (days.length === 0) {
+      days = Array<Day | null>(5).fill(null)
+    }
+
+    return days.map((day) => {
+      if (day === null) return <td className="utilgjengelig">Utilgjengelig</td>
+      return (
+        <td key={day.id}>
+          <Link href={`/employees/${day.employee.id}`}>
+            {day.employee.name}
+          </Link>
+        </td>
+      )
+    })
+  }
+
+
   return (
 
     <>
@@ -77,22 +95,7 @@ export default function WeekCards({from, to}: Filter) {
 
                 <tbody>
                 <tr>
-                  {week.day.map((day: Day) => {
-                    return (
-                      <>
-                        {/* TODO: FIX HERE*/}
-                        {day.id == null ? (
-                          <td className="utilgjengelig">Utilgjengelig</td>
-                        ) : (
-                          <td key={day.id}>
-                            <Link href={`/employees/${day.employee.id}`}>
-                              {day.employee.name}
-                            </Link>
-                          </td>
-                        )}
-                      </>
-                    )
-                  })}
+                  {renderDays(week.day)}
                 </tr>
                 <button
                   onClick={() => toggleFunction(week.id)}
@@ -101,23 +104,6 @@ export default function WeekCards({from, to}: Filter) {
                   Lukk dager
                 </button>
                 </tbody>
-                {/* <ul>
-                  {week.day.map((day: Day) => {
-                    return (
-                      <>
-                        <li key={day.id}>
-                          <span>{day.name}</span>{' '}
-                          <Link href={`/employees/${day.employee.id}`}>
-                            {day.employee.name}
-                          </Link>
-                        </li>
-                      </>
-                    )
-                  })}
-                  <button onClick={() => toggleFunction(week.id)}>
-                    Lukk dager
-                  </button>
-                </ul> */}
               </table>
             </section>
           </>
