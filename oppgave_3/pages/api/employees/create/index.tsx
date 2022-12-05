@@ -11,16 +11,7 @@ export default async function handler(
 ) {
   switch (req.method?.toLowerCase()) {
     case 'post':
-      const { employeeNum, name, rules } = req.body
-
-      return await employeeController.createEmployee({
-        employeeNum,
-        name,
-        rules,
-        req,
-        res,
-      })
-
+      return await employeeController.createEmployee({ req, res })
     default:
       return res.status(405).json({
         status: false,

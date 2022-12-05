@@ -1,13 +1,10 @@
 import { NextApiResponse } from 'next'
-import { MVCProps, Result } from '../../types'
+import { MVCRequestResponse, Result } from '../../types'
 import * as employeeService from './employees.service'
 
-export const createEmployee = async ({
-  employeeNum,
-  name,
-  rules,
-  res,
-}: MVCProps) => {
+export const createEmployee = async ({ req, res }: MVCRequestResponse) => {
+  const { employeeNum, name, rules } = req.body
+
   if (!employeeNum || !name || !rules) {
     return res.status(400).json({
       status: false,
