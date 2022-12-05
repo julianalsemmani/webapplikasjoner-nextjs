@@ -38,22 +38,14 @@ export default async function handler(
       return res.status(200).json({ status: true, data: employee })
 
     case 'put':
-      // TODO: FIX TYPO IN PRISMA SCHEMA
-      // TODO: FIX PUT REQUEST
+      const { id: employeeId, ...data } = req.body
       const updatedEmployee = await prisma.emploee.update({
         where: {
-          id,
+          id: employeeId,
         },
-        data: {
-          name: req.body.name,
-        },
+        data,
       })
 
-      return res.status(201).json({ status: true, data: {} })
-    default:
-      return res.status(405).json({
-        status: false,
-        error: 'Method not allowed',
-      })
+      return res.status(200).json({ status: true, data: updatedEmployee })
   }
 }

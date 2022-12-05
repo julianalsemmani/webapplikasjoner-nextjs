@@ -23,6 +23,7 @@ export default async function handler(
             res.status(200).json({ data: employee, status: true })
             // console.log( { employee })
         } catch (error) {
+            console.log(error)
             res.status(400).json({ error: 'Not able to create', status: false })
         }
         break
