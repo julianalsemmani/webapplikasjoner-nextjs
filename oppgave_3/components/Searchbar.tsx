@@ -24,22 +24,25 @@ export default function SearchBar() {
       console.log(result)
       if (result.success && result.data.length === 1) {
         await router.push(`/employees/${result?.data[0].id}`)
+      } else {
+        setStatus('error')
+        setTimeout(() => {
+          setName("");
+          setStatus('success');
+        }, 1500)
       }
     } catch (error) {
       setStatus('error')
       console.log(error)
-      setTimeout(() => {
-        setStatus('idle')
-      }, 2000)
     }
   }
 
   if (isLoading) {
-    return <p>Henter data ...</p>
+    return <h3>Henter data ...</h3>
   }
 
   if (isError) {
-    return <p>Fant ikke ansatt ...</p>
+    return <h3>Fant ikke ansatt ...</h3>
   }
 
   return (
