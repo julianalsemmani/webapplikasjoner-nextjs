@@ -9,7 +9,7 @@ import { getEmployeeById } from '../../../api/employees'
 export default function Employees() {
   const [name, setName] = useState<string>('')
   const [status, setStatus] = useState('idle')
-  const [employeeId, setEmployeeId] = useState<string>('')
+  const [Id, setId] = useState<string>('')
 
   const isLoading = status === 'loading'
   const isError = status === 'error'
@@ -17,7 +17,7 @@ export default function Employees() {
   const router = useRouter()
   
   useEffect(() => {
-    setEmployeeId(String(router.query.id));
+    setId(String(router.query.id));
   })
 
   const handleSubmit = async (event: any) => {
@@ -25,12 +25,12 @@ export default function Employees() {
     setStatus('loading')
 
     try {
-      const response = await fetch(`/api/employees/${employeeId}`, {
+      const response = await fetch(`/api/employees/${Id}`, {
         method: 'put',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ employeeId: String(employeeId), name: String(name) }),
+        body: JSON.stringify({ id: String(Id), name: String(name) }),
       })
 
       const data = await response.json()
@@ -56,7 +56,7 @@ export default function Employees() {
     <>
       <main>
         <Navbar />
-        <h2>Oppdater navn til ansatt med Id: {employeeId}</h2>
+        <h2>Oppdater navn til ansatt med Id: {Id}</h2>
         <form onSubmit={handleSubmit}>
           <label htmlFor="name">Nytt Navn:</label>
           <input

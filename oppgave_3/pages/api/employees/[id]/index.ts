@@ -38,10 +38,10 @@ export default async function handler(
       return res.status(200).json({ status: true, data: employee })
 
     case 'put':
-      const { id: employeeId, ...data } = req.body
+      const { id: Id, ...data } = req.body
       const updatedEmployee = await prisma.emploee.update({
         where: {
-          id: employeeId,
+          id: Id,
         },
         data,
       })

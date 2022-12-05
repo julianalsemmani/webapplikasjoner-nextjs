@@ -22,6 +22,8 @@ export default function CreateEmployee() {
                 },
                 body: JSON.stringify({ employeeNum, name, rules }),
             })
+            const data = await response.json()
+            console.log(data)
             setStatus('success')
             router.push(`/employees`)
         } catch (error) {
@@ -48,14 +50,14 @@ export default function CreateEmployee() {
             <label htmlFor="employeeNum">Ansatt nummer:</label>
             <input
                 type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={employeeNum}
+                onChange={(e) => setEmployeeNum(e.target.value)}
             />
             <label htmlFor="name">Navn:</label>
             <input
                 type="text"
-                value={employeeNum}
-                onChange={(e) => setEmployeeNum(e.target.value)}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
             />
 
             <label htmlFor="rules">Regler:</label>
