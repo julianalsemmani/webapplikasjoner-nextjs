@@ -26,6 +26,7 @@ model Day {
   employeeNum   Int
   week          Week    @relation(fields: [weekId], references: [id])
   weekId        String
+  overWrites    Overwrites[]
 }
 
 model Week {
@@ -34,11 +35,18 @@ model Week {
   day       Day[]
   year      Year    @relation(fields: [yearId], references: [id])
   yearId    String
-
+  overWrites Overwrites[]
 }
 
 model Year {
   id    String  @id @default(cuid())
   name  String  @unique
   week  Week[]
+}
+
+model Overwrites {
+  id           String  @id @default(cuid())
+  day          Day[]
+  week         Week   @relation(fields: [weekId], references: [id])
+  weekId       String
 }
