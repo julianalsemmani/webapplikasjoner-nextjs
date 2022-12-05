@@ -14,7 +14,6 @@ export default async function handler(
         const { employeeNum, name, rules } = req.body
         const employee = await prisma.employee.create({
           data: {
-            id: randomUUID(),
             employeeNum: parseInt(employeeNum),
             name,
             rules,
