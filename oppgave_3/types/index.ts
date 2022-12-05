@@ -1,3 +1,5 @@
+import { NextApiRequest, NextApiResponse } from 'next'
+
 export type Data = {
   status: true
   data: Record<string, unknown>
@@ -39,4 +41,23 @@ export type Year = {
   id: string
   name: string
   week: Week[]
+}
+
+export type MVCEmployeeProps = {
+  employeeNum: number
+  name: string
+  rules: string
+}
+
+export type MVCRequestResponse = {
+  req: NextApiRequest
+  res: NextApiResponse<Result>
+}
+
+export type MVCProps = {
+  employeeNum: number
+  name: string
+  rules: string
+  req: NextApiRequest
+  res: NextApiResponse<Result>
 }
