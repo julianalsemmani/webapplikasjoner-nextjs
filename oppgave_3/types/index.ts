@@ -46,9 +46,8 @@ export type Year = {
 
 export type Overwrites = {
   id: string
-  day: Day[]
-  week: Week
-  weekId: string
+  day: Day
+  dayId: string
   employee: Employee
   employeeNum: number
 }

@@ -36,7 +36,6 @@ model Week {
   day       Day[]
   year      Year    @relation(fields: [yearId], references: [id])
   yearId    String
-  overWrites Overwrites[]
 }
 
 model Year {
@@ -47,9 +46,8 @@ model Year {
 
 model Overwrites {
   id           String  @id @default(cuid())
-  day          Day[]
-  week         Week   @relation(fields: [weekId], references: [id])
-  weekId       String
+  day          Day @relation(fields: [dayId], references: [id])
+  dayId        String
   employee     Employee @relation(fields: [employeeNum], references: [employeeNum])
   employeeNum  Int
 }
