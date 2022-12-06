@@ -28,8 +28,8 @@ export default async function handler(
                       name: true,
                     },
                   },
-                  }
-              }
+                },
+              },
             },
           },
         },

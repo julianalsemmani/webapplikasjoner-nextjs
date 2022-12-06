@@ -17,11 +17,11 @@ export default async function handler(
                 include: {
                   employee: {
                     select: {
-                      name: true
-                    }
+                      name: true,
+                    },
                   },
-                }
-              }
+                },
+              },
             },
           },
         },
