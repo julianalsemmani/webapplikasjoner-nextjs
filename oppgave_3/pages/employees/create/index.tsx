@@ -59,7 +59,7 @@ export default function CreateEmployee() {
         <input
           type="text"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => setName(e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1).toLowerCase())}
         />
 
         <label htmlFor="rules">Regler:</label>

@@ -17,7 +17,7 @@ export default function SearchBar() {
     setStatus('loading')
 
     try {
-      const result = await getEmployeeByName(name.charAt(0).toUpperCase() + name.slice(1))
+      const result = await getEmployeeByName(name)
       setStatus('success')
       console.log(result)
       if (result.status && result.data.length === 1) {
@@ -51,7 +51,7 @@ export default function SearchBar() {
         <input
           type="text"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => setName(e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1).toLowerCase())}
         />
         <button type="submit">Søk</button>
       </form>
