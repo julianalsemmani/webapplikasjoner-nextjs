@@ -77,6 +77,15 @@ export const getWeeksByQueryParameters = async (from: number, to: number) => {
         day: {
           include: {
             employee: true,
+            overWrites: {
+              include: {
+                employee: {
+                  select: {
+                    name: true,
+                  },
+                },
+              },
+            },
           },
         },
       },
