@@ -20,17 +20,24 @@ export default async function handler(
       // return res.status(200).json(overwrite);
       return await overwriteController.getAllOverwrites(res)
     case 'post':
-      //   const { id: Id, ...data } = req.body
-      //   const updatedOverwrite = await prisma.overwrites.update({
-      //     where: {
-      //       id: Id,
-      //     },
-      //     data,
-      //   })
+      const { weekId, employeeNum, currentDay, employee } = req.body
 
-      //   return res.status(200).json(updatedOverwrite)
-      // FIXME: CREATE OR UPDATE?
-      return await overwriteController.createOverwrite({ req, res })
+      const createdOverwrite = await prisma.overwrites.create({
+        data: {
+          weekId: weekId,
+          employeeNum: employeeNum,
+          day: {
+            currentDay,
+          },
+          employee: {
+            create: employee,
+          },
+        },
+      })
+
+      return res.status(200).json(createdOverwrite)
+    // FIXME: CREATE OR UPDATE?
+    // return await overwriteController.createOverwrite({ req, res })
     default:
       return res
         .status(405)
