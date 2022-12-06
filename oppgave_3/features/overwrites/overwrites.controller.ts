@@ -18,26 +18,29 @@ export const getAllOverwrites = async (res: NextApiResponse<Result>) => {
 }
 
 export const createOverwrite = async ({ req, res }: MVCRequestResponse) => {
-  const { id: id, ...data } = req.body
+  const { dayId, employeeNum } = req.body
 
-  if (!id || !data) {
+  if (!dayId || !employeeNum) {
     return res.status(400).json({
       status: false,
-      error: 'Missing required fields: id, data',
+      error: 'Missing required fields: dayId, employeeNum',
     })
   }
 
-  const createdOverwrite = await overwriteService.createOverwrite(id, data)
+  const createdOverwrite = await overwriteService.createOverwrite(
+    dayId,
+    employeeNum
+  )
 
   if (!createdOverwrite?.status) {
     return res.status(500).json({
       status: false,
-      error: createdOverwrite.error!,
+      error: 'Failed creating an overwrite',
     })
   }
 
-  return res.status(200).json({
+  return res.status(201).json({
     status: true,
-    data: { ...createdOverwrite.data },
+    data: { ...createOverwrite.data },
   })
 }
