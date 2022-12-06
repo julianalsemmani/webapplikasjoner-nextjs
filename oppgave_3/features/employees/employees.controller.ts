@@ -77,6 +77,13 @@ export const updateEmployeeByURL = async ({ req, res }: MVCRequestResponse) => {
 
   const updatedEmployee = await employeeService.updateEmployeeByURL(id, data)
 
+  if (!updatedEmployee?.status) {
+    return res.status(500).json({
+      status: false,
+      error: updatedEmployee.error!,
+    })
+  }
+
   return res
     .status(200)
     .json({ status: true, data: { ...updatedEmployee.data } })

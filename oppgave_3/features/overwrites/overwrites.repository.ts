@@ -1,41 +1,47 @@
 import prisma from '../../lib/db'
+import { MVCEmployeeProps } from '../../types'
 
-export const getOverwrite = async (id: string) => {
-  const overwrite = await prisma.overwrites.findUnique({
-    where: {
-      id,
-    },
-  })
+export const getAllOverwrites = async () => {
+  try {
+    const overwrites = await prisma.overwrites.findMany({
+      include: {
+        employee: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    })
 
-  if (!overwrite) {
-    return { success: false, error: 'Overwrite not found' }
+    return {
+      status: true,
+      data: overwrites,
+    }
+  } catch (error) {
+    return {
+      status: false,
+      error: 'Failed getting all overwrites',
+    }
   }
-
-  return { success: true, data: overwrite }
 }
 
-export const createOverwrite = async (data: any) => {
-  const overwrite = await prisma.overwrites.create({
-    data,
-  })
+export const createOverwrite = async (id: string, data: MVCEmployeeProps) => {
+  try {
+    const createdOverwrite = await prisma.overwrites.update({
+      where: {
+        id: id,
+      },
+      data,
+    })
 
-  if (!overwrite) {
-    return { success: false, error: 'Could not create overwrite' }
+    return {
+      status: true,
+      data: createdOverwrite,
+    }
+  } catch (error) {
+    return {
+      status: false,
+      error: 'Failed updating creating overwrite',
+    }
   }
-
-  return { success: true, data: overwrite }
-}
-
-export const exists = async (name: string) => {
-  const overwrite = await prisma.overwrite.findUnique({
-    where: {
-      name,
-    },
-  })
-
-  if (overwrite) {
-    return { success: true, data: overwrite }
-  }
-
-  return { success: false }
 }

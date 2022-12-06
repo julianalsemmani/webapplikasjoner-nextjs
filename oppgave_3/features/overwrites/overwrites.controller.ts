@@ -1,53 +1,44 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import * as overwritesService from "./overwrites.service";
+import { NextApiResponse } from 'next'
+import { MVCRequestResponse, Result } from '../../types'
+import * as overwriteService from './overwrites.service'
 
-fetch("", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-        id: 1,
-        name: "test",
-    })
-})
+export const getAllOverwrites = async (res: NextApiResponse<Result>) => {
+  const overwrites = await overwriteService.getAllOverwrites()
 
-export const getOverwrite = async (req: NextApiRequest, res: NextApiResponse) => {
-    const { id } = req.query;
+  if (!overwrites?.success) {
+    return res
+      .status(404)
+      .json({ status: false, error: 'Failed getting overwrites' })
+  }
 
-    if (!id) {
-        return res
-            .status(400)
-            .json({ status: false, error: "Id is missing" });
-    }
-
-    const overwrite = await overwritesService.getOverwrite(String(id));
-
-    if (!overwrite?.success) {
-        return res
-            .status(404)
-            .json({ status: false, error: "Overwrite not found" });
-    }
-
-    return res.status(200).json({ status: true, data: overwrite });
+  return res.status(200).json({
+    status: true,
+    // FIXME: typescript-error
+    data: overwrites.data,
+  })
 }
 
-export const postOverwrite = async (req: NextApiRequest, res: NextApiResponse) => {
-    const { name } = req.body;
+export const createOverwrite = async ({ req, res }: MVCRequestResponse) => {
+  const { id: id, ...data } = req.body
 
-    if (!name) {
-        return res
-            .status(400)
-            .json({ status: false, error: "Name is missing" });
-    }
+  if (!id || !data) {
+    return res.status(400).json({
+      status: false,
+      error: 'Missing required fields: id, data',
+    })
+  }
 
-    const overwrite = await overwritesService.createOverwrite(name);
+  const createdOverwrite = await overwriteService.createOverwrite(id, data)
 
-    if (!overwrite?.success) {
-        return res
-            .status(500)
-            .json({ status: false, error: "Could not create overwrite" });
-    }
+  if (!createdOverwrite?.status) {
+    return res.status(500).json({
+      status: false,
+      error: createdOverwrite.error!,
+    })
+  }
 
-    return res.status(200).json({ status: true, data: overwrite });
+  return res.status(200).json({
+    status: true,
+    data: { ...createdOverwrite.data },
+  })
 }

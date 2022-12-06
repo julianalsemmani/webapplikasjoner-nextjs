@@ -1,26 +1,28 @@
-import * as userRepo from "./overwrites.repository";
+import { MVCEmployeeProps } from '../../types'
+import * as overwriteRepository from './overwrites.repository'
 
-export const getOverwrite = async (id: string) => {
-    const overwrite = await userRepo.getOverwrite(id);
+export const getAllOverwrites = async () => {
+  const overwrites = await overwriteRepository.getAllOverwrites()
 
-    if (!overwrite?.success) {
-        return { success: false, error: "Overwrite not found" };
+  if (!overwrites?.status) {
+    return {
+      status: false,
+      error: overwrites.error,
     }
+  }
 
-    return { success: true, data: overwrite };
+  return { success: true, data: overwrites.data }
 }
 
-export const createOverwrite = async (name: string) => {
-    const overwrite = await userRepo.exists(name);
+export const createOverwrite = async (id: string, data: MVCEmployeeProps) => {
+  const overwrite = await overwriteRepository.createOverwrite(id, data)
 
-
-    if (overwrite?.data) {
-        return { success: false, error: "Overwrite already exists" };
+  if (!overwrite?.status) {
+    return {
+      status: false,
+      error: overwrite.error,
     }
+  }
 
-    const newOverwrite = await userRepo.createOverwrite({ name });
-
-    if (!newOverwrite?.success) {
-        return { success: false, error: "Could not create overwrite" };
-    }
+  return { status: true, data: overwrite.data }
 }

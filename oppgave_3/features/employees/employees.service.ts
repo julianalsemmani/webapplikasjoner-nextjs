@@ -64,7 +64,7 @@ export const updateEmployeeByURL = async (
 ) => {
   const employee = await employeeRepository.updateEmployeeByURL(id, data)
 
-  if (!employee.status) {
+  if (!employee?.status) {
     return {
       status: false,
       error: employee.error,
