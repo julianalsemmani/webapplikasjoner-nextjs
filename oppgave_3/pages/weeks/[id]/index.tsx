@@ -53,11 +53,33 @@ export default function Week() {
             <tr>
               {week?.day.map((day: Day) => {
                 return (
-                  <td key={day.id}>
-                    <Link href={`/employees/${day.employee.id}`}>
-                      {day.employee.name}
-                    </Link>
-                  </td>
+                  <>
+                    {day.overWrites.length > 0 ? (
+                      <td>
+                        <span>
+                          <Link href={`/employees/${day.employee.id}`}>
+                            <span className="utilgjengelig-person">
+                              {day.employee.name + ' '}
+                            </span>
+                          </Link>
+                        </span>
+                        |
+                        <span>
+                          <Link
+                            href={`/employees/${day.overWrites[0].employee.id}`}
+                          >
+                            {' ' + day.overWrites[0].employee.name}
+                          </Link>
+                        </span>
+                      </td>
+                    ) : (
+                      <td>
+                        <Link href={`/employees/${day.employee.id}`}>
+                          {day.employee.name}
+                        </Link>
+                      </td>
+                    )}
+                  </>
                 )
               })}
             </tr>

@@ -57,12 +57,12 @@ export default function WeekCards({ from, to }: Filter) {
             <span className="span-cursor">
               <Link href={`/employees/${day.employee.id}`}>
                 <span className="utilgjengelig-person">
-                  {day.employee.name + " "}
+                  {day.employee.name + ' '}
                 </span>
               </Link>
               |
               <Link href={`/employees/${day.overWrites[0].employee.id}`}>
-                <span>{" " + day.overWrites[0].employee.name}</span>
+                <span>{' ' + day.overWrites[0].employee.name}</span>
               </Link>
             </span>
           ) : (
