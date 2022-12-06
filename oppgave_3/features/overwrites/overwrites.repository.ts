@@ -1,5 +1,4 @@
 import prisma from '../../lib/db'
-import { MVCEmployeeProps } from '../../types'
 
 export const getAllOverwrites = async () => {
   try {
@@ -26,13 +25,13 @@ export const getAllOverwrites = async () => {
   }
 }
 
-export const createOverwrite = async (id: string, data: MVCEmployeeProps) => {
+export const createOverwrite = async (dayId: string, employeeNum: number) => {
   try {
-    const createdOverwrite = await prisma.overwrites.update({
-      where: {
-        id: id,
+    const createdOverwrite = await prisma.overwrites.create({
+      data: {
+        dayId,
+        employeeNum,
       },
-      data,
     })
 
     return {
@@ -42,7 +41,7 @@ export const createOverwrite = async (id: string, data: MVCEmployeeProps) => {
   } catch (error) {
     return {
       status: false,
-      error: 'Failed updating creating overwrite',
+      error: 'Failed creating an overwrite',
     }
   }
 }

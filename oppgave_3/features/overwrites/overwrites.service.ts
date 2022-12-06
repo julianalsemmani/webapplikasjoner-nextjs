@@ -1,4 +1,3 @@
-import { MVCEmployeeProps } from '../../types'
 import * as overwriteRepository from './overwrites.repository'
 
 export const getAllOverwrites = async () => {
@@ -14,15 +13,25 @@ export const getAllOverwrites = async () => {
   return { success: true, data: overwrites.data }
 }
 
-export const createOverwrite = async (id: string, data: MVCEmployeeProps) => {
-  const overwrite = await overwriteRepository.createOverwrite(id, data)
+export const createOverwrite = async (dayId: string, employeeNum: number) => {
+  const createdOverwrite = await overwriteRepository.createOverwrite(
+    dayId,
+    employeeNum
+  )
 
-  if (!overwrite?.status) {
+  if (!createdOverwrite?.status) {
     return {
       status: false,
-      error: overwrite.error,
+      error: createdOverwrite.error,
     }
   }
 
-  return { status: true, data: overwrite.data }
+  if (!createdOverwrite?.status) {
+    return {
+      status: false,
+      error: createdOverwrite.error,
+    }
+  }
+
+  return { status: true, data: createdOverwrite.data }
 }

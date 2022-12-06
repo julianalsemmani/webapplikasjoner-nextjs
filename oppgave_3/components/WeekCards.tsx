@@ -1,9 +1,9 @@
-import { useState, useEffect, ReactNode } from 'react'
+import {useState, useEffect, ReactNode} from 'react'
 import Link from 'next/link'
-import { Day, Week } from '../types'
-import { Filter } from '../pages'
+import {Day, Week} from '../types'
+import {Filter} from '../pages'
 
-export default function WeekCards({ from, to }: Filter) {
+export default function WeekCards({from, to}: Filter) {
   const [weeks, setWeeks] = useState<Week[]>([])
   const [toggle, setToggle] = useState<Record<string, boolean>>({})
 
@@ -48,8 +48,8 @@ export default function WeekCards({ from, to }: Filter) {
       days = Array<Day | null>(5).fill(null)
     }
 
-    return days.map((day) => {
-      if (day === null) return <td className="utilgjengelig">Ferie</td>
+    return days.map((day, index) => {
+      if (day === null) return <td key={index} className="utilgjengelig">Ferie</td>
       return (
         <td key={day.id}>
           {day.overWrites.length > 0 ? (
@@ -76,14 +76,14 @@ export default function WeekCards({ from, to }: Filter) {
 
   return (
     <>
-      {weeks?.map((week: Week) => {
+      {weeks?.map((week: Week, index) => {
         return (
-          <>
+          <div key={index}>
             <section>
               <h2 className="week-cards-title">Uke {week.week}</h2>
               <button
                 onClick={() => toggleFunction(week.id)}
-                style={{ display: toggle[week.id] ? 'none' : '' }}
+                style={{display: toggle[week.id] ? 'none' : ''}}
                 className="week-cards-button"
               >
                 Se dager
@@ -92,30 +92,31 @@ export default function WeekCards({ from, to }: Filter) {
               <table
                 className="table-style"
                 key={week.id}
-                style={{ display: toggle[week.id] ? '' : 'none' }}
+                style={{display: toggle[week.id] ? '' : 'none'}}
               >
                 <thead>
-                  <tr>
-                    <th>Mandag</th>
-                    <th>Tirsdag</th>
-                    <th>Onsdag</th>
-                    <th>Torsdag</th>
-                    <th>Fredag</th>
-                  </tr>
+                <tr>
+                  <th>Mandag</th>
+                  <th>Tirsdag</th>
+                  <th>Onsdag</th>
+                  <th>Torsdag</th>
+                  <th>Fredag</th>
+                </tr>
                 </thead>
 
                 <tbody>
                   <tr>{renderDays(week.day)}</tr>
-                  <button
-                    onClick={() => toggleFunction(week.id)}
-                    className="week-cards-button"
-                  >
-                    Lukk dager
-                  </button>
                 </tbody>
               </table>
+
+              <button
+                onClick={() => toggleFunction(week.id)}
+                className="week-cards-button"
+              >
+                Lukk dager
+              </button>
             </section>
-          </>
+          </div>
         )
       })}
     </>
