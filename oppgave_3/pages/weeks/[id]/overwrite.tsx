@@ -41,7 +41,37 @@ export default function Overwrite() {
 
     }, []);
 
-    console.log(day)
+    const handleSubmit = async (event: any) => {
+        event.preventDefault();
+        
+        var currentEmp;
+
+        employees.map((employee: Employee) => {
+            if (employee.id == name) {
+                currentEmp = employee
+            }
+        })
+
+        var currentDay;
+        day?.map((day: Day) => {
+            if (day.id == selectedDay) {
+                currentDay = day
+            }
+        })
+
+        var obj = {
+            id: "sdfsHJSDFHSDF7DSHFSDHJKFHJ",
+            weekId: currentDay?.weekId,
+            employeeNum: currentEmp?.employeeNum,
+            employee: {
+                id: currentEmp?.id,
+                name: currentEmp?.name
+            }
+        }
+
+        console.log(obj)
+
+    }
 
     return (
         <>
@@ -50,7 +80,7 @@ export default function Overwrite() {
                 <h1>Overskriv Dag</h1>
                 <p>{selectedDay}</p>
                 <p>{name}</p>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <label htmlFor="day">Dag:</label>
                     <select name="day" id="day" value={selectedDay} onChange={((e) => setSelectedDay(e.target.value))}>
                         {day?.map((day: Day) => {
