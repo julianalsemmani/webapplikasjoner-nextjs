@@ -1,14 +1,4 @@
 // TODO: Her er det bugs
-/* 
-  CHANGES DONE
-  > put type strike: Strike in isGameOver-function
-  > isGameOver-function now returns true if all strike.icons equals '🚫'
-  > handleGuess-function now uses .shift() instead of .pop() to remove the first element in the array if guess is wrong
-  > handleGuess-function pushes a new Strike with '🚫'-icon to strikes-array if guess is wrong
-
-  SUGGESTIONS
-  > 
-*/
 
 import { useState } from 'react'
 import { Strike } from '../components/Strikes'

@@ -1,13 +1,4 @@
 // TODO: Her er det bugs
-/* 
-  CHANGES DONE
-  > return status set to 200 instead of 404
-  > made response types
-  > now imports data from ../../data
-
-  SUGGESTIONS
-  > import data(countries) from /data?
-*/
 
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { countries } from '../../data'
