@@ -1,7 +1,7 @@
 import prisma from '../../lib/db'
 
 export const getOverwrite = async (id: string) => {
-  const overwrite = await prisma.overwrite.findUnique({
+  const overwrite = await prisma.overwrites.findUnique({
     where: {
       id,
     },
@@ -15,7 +15,7 @@ export const getOverwrite = async (id: string) => {
 }
 
 export const createOverwrite = async (data: any) => {
-  const overwrite = await prisma.overwrite.create({
+  const overwrite = await prisma.overwrites.create({
     data,
   })
 
