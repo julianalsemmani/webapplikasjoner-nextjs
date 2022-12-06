@@ -21,6 +21,7 @@ export const useGame = () => {
 
   const isSolved = (country: Country, guesses: string[]) => {
     if (!country) return false
+
     return [...country.name.replaceAll(' ', '').toLowerCase()].every(
       (letter) => {
         return guesses.includes(letter)
@@ -28,7 +29,9 @@ export const useGame = () => {
     )
   }
 
-  const isGameOver = strikes.every((strike: any) => strike.guess) ? true : false
+  const isGameOver = strikes.every((strike: Strike) => strike.icon === '🚫')
+    ? true
+    : false
 
   const getMessage = () => {
     if (isSolved(country, guesses) && !isGameOver) return 'Du klarte det'
@@ -52,7 +55,9 @@ export const useGame = () => {
   const handleGuess = (letter: string) => {
     if (!country?.name?.toLowerCase().includes(letter.toLowerCase())) {
       const strikeCopy = [...strikes]
-      strikeCopy.pop()
+      strikeCopy.shift()
+      strikeCopy.push({ icon: '🚫', guess: letter })
+      setStrikes(strikeCopy)
     }
     setGuesses((prev: string[]) => [...prev, letter.toLowerCase()])
   }

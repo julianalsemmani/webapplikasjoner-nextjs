@@ -1,42 +1,14 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-
-import prisma from '../../../../../lib/db'
+import { Result } from '../../../../../types'
+import * as employeeController from '../../../../../features/employees/employees.controller'
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse<Result>
 ) {
   switch (req.method?.toLowerCase()) {
     case 'get':
-      const name =
-        req.query.name instanceof Array
-          ? req.query.name.find((i) => i.includes('name'))
-          : req.query.name
-      console.log(name)
-      if (!name)
-        return res
-          .status(400)
-          .json({ success: false, error: 'Name is missing' })
-      const employees = await prisma.employee.findMany({
-        include: {
-          day: {
-            include: {
-              week: true,
-            },
-          },
-        },
-        where: {
-          name,
-        },
-      })
-
-      console.log(employees)
-      if (!employees)
-        return res
-          .status(404)
-          .json({ status: false, error: 'Employee not found' })
-
-      return res.status(200).json({ success: true, data: employees })
+      return await employeeController.getEmployeeBySearchingName({ req, res })
     default:
       return res.status(405).json({
         status: false,

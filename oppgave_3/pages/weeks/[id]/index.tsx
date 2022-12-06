@@ -22,8 +22,8 @@ export default function Week() {
           },
         })
 
-        const data = await response.json()
-        setWeek(data.data)
+        const week = await response.json()
+        setWeek(week.data)
       } catch (error) {
         console.log(error)
       }
@@ -35,7 +35,6 @@ export default function Week() {
   return (
     <>
       <main>
-        <h1>Lunsjkalender</h1>
         <Navbar />
 
         <h2>Uke {week?.week}</h2>
@@ -49,34 +48,43 @@ export default function Week() {
               <th>Fredag</th>
             </tr>
           </thead>
+
           <tbody>
             <tr>
               {week?.day.map((day: Day) => {
                 return (
-                  <td key={day.id}>
-                    <Link href={`/employees/${day.employee.id}`}>
-                      {day.employee.name}
-                    </Link>
-                  </td>
+                  <>
+                    {day.overWrites.length > 0 ? (
+                      <td>
+                        <span>
+                          <Link href={`/employees/${day.employee.id}`}>
+                            <span className="utilgjengelig-person">
+                              {day.employee.name + ' '}
+                            </span>
+                          </Link>
+                        </span>
+                        |
+                        <span>
+                          <Link
+                            href={`/employees/${day.overWrites[0].employee.id}`}
+                          >
+                            {' ' + day.overWrites[0].employee.name}
+                          </Link>
+                        </span>
+                      </td>
+                    ) : (
+                      <td>
+                        <Link href={`/employees/${day.employee.id}`}>
+                          {day.employee.name}
+                        </Link>
+                      </td>
+                    )}
+                  </>
                 )
               })}
             </tr>
           </tbody>
         </table>
-        {/* <ul key={week?.week}>
-          {week?.day.map((day: Day) => {
-            return (
-              <>
-                <li key={day.id}>
-                  <span>{day.name}</span>{' '}
-                  <Link href={`/employees/${day.employee.id}`}>
-                    {day.employee.name}
-                  </Link>
-                </li>
-              </>
-            )
-          })}
-        </ul> */}
       </main>
     </>
   )

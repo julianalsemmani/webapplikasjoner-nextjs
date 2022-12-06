@@ -1,7 +1,7 @@
 import {useState, useEffect, ReactNode} from 'react'
 import Link from 'next/link'
 import {Day, Week} from '../types'
-import {Filter} from "../pages";
+import {Filter} from '../pages'
 
 export default function WeekCards({from, to}: Filter) {
   const [weeks, setWeeks] = useState<Week[]>([])
@@ -24,24 +24,23 @@ export default function WeekCards({from, to}: Filter) {
           },
         })
 
-        const data = await response.json()
+        const weeks = await response.json()
 
-        setWeeks(Object.values(data.data))
+        setWeeks(weeks.data)
       } catch (error) {
         console.log(error)
       }
     }
 
-    const url = (from === 0 || to === 0)
-      ? '/api/weeks'
-      : `/api/weeks/range?from=${from}&to=${to}`
+    const url =
+      from === 0 || to === 0
+        ? '/api/weeks'
+        : `/api/weeks/range?from=${from}&to=${to}`
 
-    handler(url)
-      .catch((err) => {
-        console.log(err)
-        setWeeks([])
-      })
-
+    handler(url).catch((err) => {
+      console.log(err)
+      setWeeks([])
+    })
   }, [from, to])
 
   function renderDays(days: (Day | null)[]): ReactNode {
@@ -49,25 +48,37 @@ export default function WeekCards({from, to}: Filter) {
       days = Array<Day | null>(5).fill(null)
     }
 
-    return days.map((day) => {
-      if (day === null) return <td className="utilgjengelig">Utilgjengelig</td>
+    return days.map((day, index) => {
+      if (day === null) return <td key={index} className="utilgjengelig">Ferie</td>
       return (
         <td key={day.id}>
-          <Link href={`/employees/${day.employee.id}`}>
-            {day.employee.name}
-          </Link>
+          {day.overWrites.length > 0 ? (
+            <span className="span-cursor">
+              <Link href={`/employees/${day.employee.id}`}>
+                <span className="utilgjengelig-person">
+                  {day.employee.name + ' '}
+                </span>
+              </Link>
+              |
+              <Link href={`/employees/${day.overWrites[0].employee.id}`}>
+                <span>{' ' + day.overWrites[0].employee.name}</span>
+              </Link>
+            </span>
+          ) : (
+            <Link href={`/employees/${day.employee.id}`}>
+              {day.employee.name}
+            </Link>
+          )}
         </td>
       )
     })
   }
 
-
   return (
-
     <>
-      {weeks.map((week: Week) => {
+      {weeks?.map((week: Week, index) => {
         return (
-          <>
+          <div key={index}>
             <section>
               <h2 className="week-cards-title">Uke {week.week}</h2>
               <button
@@ -94,19 +105,18 @@ export default function WeekCards({from, to}: Filter) {
                 </thead>
 
                 <tbody>
-                <tr>
-                  {renderDays(week.day)}
-                </tr>
-                <button
-                  onClick={() => toggleFunction(week.id)}
-                  className="week-cards-button"
-                >
-                  Lukk dager
-                </button>
+                  <tr>{renderDays(week.day)}</tr>
                 </tbody>
               </table>
+
+              <button
+                onClick={() => toggleFunction(week.id)}
+                className="week-cards-button"
+              >
+                Lukk dager
+              </button>
             </section>
-          </>
+          </div>
         )
       })}
     </>

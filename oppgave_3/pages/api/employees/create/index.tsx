@@ -1,8 +1,6 @@
-import { randomUUID } from 'crypto'
 import { NextApiRequest, NextApiResponse } from 'next'
-import { E } from 'vitest/dist/global-732f9b14'
-import prisma from '../../../../lib/db'
 import { Result } from '../../../../types'
+import * as employeeController from '../../../../features/employees/employees.controller'
 
 export default async function handler(
   req: NextApiRequest,
@@ -10,20 +8,11 @@ export default async function handler(
 ) {
   switch (req.method?.toLowerCase()) {
     case 'post':
-      try {
-        const { employeeNum, name, rules } = req.body
-        const employee = await prisma.employee.create({
-          data: {
-            employeeNum: parseInt(employeeNum),
-            name,
-            rules,
-          },
-        })
-        res.status(200).json({ data: { employee }, status: true })
-        // console.log( { employee })
-      } catch (error) {
-        console.log(error)
-        res.status(400).json({ error: 'Not able to create', status: false })
-      }
+      return await employeeController.createEmployee({ req, res })
+    default:
+      return res.status(405).json({
+        status: false,
+        error: 'Method not allowed',
+      })
   }
 }

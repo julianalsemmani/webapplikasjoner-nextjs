@@ -5,7 +5,7 @@ const letterList = Array.from('ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ')
 type LettersProps = {
   getMessage: () => string
   guesses: string[]
-  handleGuess: (letter: number) => void
+  handleGuess: (letter: string) => void
 }
 
 type LetterProps = Pick<LettersProps, 'handleGuess' | 'guesses'> & {
@@ -21,7 +21,7 @@ export default function Letters({
     <>
       <p className="message">{getMessage()}</p>
       <ul className="letters">
-        {letterList.forEach((letter) => (
+        {letterList.map((letter) => (
           <Letter
             handleGuess={handleGuess}
             guesses={guesses}
@@ -36,6 +36,7 @@ export default function Letters({
 
 const Letter = ({ letter, handleGuess, guesses }: LetterProps) => {
   const letterMatch = guesses.includes(letter.toLowerCase())
+
   return (
     <button
       onClick={() => handleGuess(letter)}

@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import prisma from '../../../lib/db'
 import { Result } from '../../../types'
+import * as employeeController from '../../../features/employees/employees.controller'
 
 export default async function handler(
   req: NextApiRequest,
@@ -8,17 +8,7 @@ export default async function handler(
 ) {
   switch (req.method?.toLowerCase()) {
     case 'get':
-      const employees = await prisma.employee.findMany({
-        include: {
-          day: {
-            include: {
-              week: true,
-            },
-          },
-        },
-      })
-
-      return res.status(200).json({ status: true, data: { ...employees } })
+      return await employeeController.getAllEmployees(res)
     default:
       return res.status(405).json({
         status: false,

@@ -1,6 +1,8 @@
+import { NextApiRequest, NextApiResponse } from 'next'
+
 export type Data = {
   status: true
-  data: Record<string, unknown>
+  data: Record<string, unknown> | Record<string, unknown>[]
 }
 
 export type Error = {
@@ -25,6 +27,7 @@ export type Day = {
   employeeNum: number
   week: Week
   weekId: string
+  overWrites: Overwrites[]
 }
 
 export type Week = {
@@ -39,4 +42,31 @@ export type Year = {
   id: string
   name: string
   week: Week[]
+}
+
+export type Overwrites = {
+  id: string
+  day: Day
+  dayId: string
+  employee: Employee
+  employeeNum: number
+}
+
+export type MVCEmployeeProps = {
+  employeeNum: number
+  name: string
+  rules: string
+}
+
+export type MVCRequestResponse = {
+  req: NextApiRequest
+  res: NextApiResponse<Result>
+}
+
+export type MVCProps = {
+  employeeNum: number
+  name: string
+  rules: string
+  req: NextApiRequest
+  res: NextApiResponse<Result>
 }
