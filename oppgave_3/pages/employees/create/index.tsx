@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
 import Navbar from '../../../components/Navbar'
 
 export default function CreateEmployee() {
@@ -12,7 +12,7 @@ export default function CreateEmployee() {
   const isError = status === 'error'
   const router = useRouter()
 
-  const handleSubmit = async (event: any) => {
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
     setStatus('loading')
     try {

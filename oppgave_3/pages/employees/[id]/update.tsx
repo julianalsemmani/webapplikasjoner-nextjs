@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { Employee } from '../../../types'
 import Navbar from '../../../components/Navbar'
 import { useRouter } from 'next/router'
@@ -35,7 +35,7 @@ export default function Employees() {
     handler()
   }, [router.query.id])
 
-  const handleSubmit = async (event: any) => {
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
     setStatus('loading')
 

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
 import { getEmployeeByName, getEmployeeById } from '../api/employees'
 import { useRouter } from 'next/router'
 
@@ -12,7 +12,7 @@ export default function SearchBar() {
 
   const router = useRouter()
 
-  const handleSubmit = async (event: any) => {
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
     setStatus('loading')
 
@@ -51,7 +51,12 @@ export default function SearchBar() {
         <input
           type="text"
           value={name}
-          onChange={(e) => setName(e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1).toLowerCase())}
+          onChange={(e) =>
+            setName(
+              e.target.value.charAt(0).toUpperCase() +
+                e.target.value.slice(1).toLowerCase()
+            )
+          }
         />
         <button type="submit">Søk</button>
       </form>
