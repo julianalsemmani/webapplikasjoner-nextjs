@@ -8,6 +8,15 @@ export const getAllWeeks = async () => {
         day: {
           include: {
             employee: true,
+            overWrites: {
+              include: {
+                employee: {
+                  select: {
+                    name: true,
+                  },
+                },
+              },
+            },
           },
         },
       },
@@ -32,6 +41,15 @@ export const getWeekByURL = async (id: string) => {
         day: {
           include: {
             employee: true,
+            overWrites: {
+              include: {
+                employee: {
+                  select: {
+                    name: true,
+                  },
+                },
+              },
+            },
           },
         },
       },

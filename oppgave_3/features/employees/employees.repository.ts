@@ -80,6 +80,7 @@ export const getEmployeeByURL = async (id: string) => {
         day: {
           include: {
             week: true,
+            overWrites: true,
           },
         },
       },
