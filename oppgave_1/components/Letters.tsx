@@ -1,12 +1,4 @@
 // TODO: Her er det bugs
-/* 
-  CHANGES DONE
-  > uses .map() instead of .forEach()
-  > changed LettersProps-handleGuess-type to letter: string
-
-  SUGGESTIONS
-  > 
-*/
 
 const letterList = Array.from('ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ')
 

@@ -1,11 +1,10 @@
-import {useState, useEffect} from 'react'
-import Link from 'next/link'
-import {Year, Week} from '../types'
-import {Filter, WeeksProps} from '../pages'
+import { useState, useEffect } from 'react'
+import { Year, Week } from '../types'
+import { Filter, WeeksProps } from '../pages'
 
-export default function Weeks({filterWeeks, refreshFilter}: WeeksProps) {
+export default function Weeks({ filterWeeks, refreshFilter }: WeeksProps) {
   const [years, setYears] = useState<Year[]>([])
-  const [filter, setFilter] = useState<Filter>({from: 0, to: 0})
+  const [filter, setFilter] = useState<Filter>({ from: 0, to: 0 })
   const [flag, setFlag] = useState<boolean>(false)
 
   useEffect(() => {
@@ -20,8 +19,7 @@ export default function Weeks({filterWeeks, refreshFilter}: WeeksProps) {
 
         const years = await response.json()
 
-        setYears(Object.values(years.data))
-        console.log(response)
+        setYears(years.data)
       } catch (error) {
         console.error(error)
       }
@@ -31,9 +29,8 @@ export default function Weeks({filterWeeks, refreshFilter}: WeeksProps) {
   }, [])
 
   useEffect(() => {
-    console.log(filter)
     if (!flag && filter.from > filter.to) {
-      setFilter({from: filter.to, to: filter.from})
+      setFilter({ from: filter.to, to: filter.from })
     }
     filterWeeks(filter.from, filter.to)
   }, [filter])
@@ -41,26 +38,32 @@ export default function Weeks({filterWeeks, refreshFilter}: WeeksProps) {
   function clickHandler(e: any) {
     e.preventDefault()
     const value: number = parseInt(e.target.innerHTML)
-    console.log(flag)
+
     if (!flag) {
-      setFilter({from: value, to: value})
+      setFilter({ from: value, to: value })
       setFlag(!flag)
       return
     }
-    setFilter({from: filter.from, to: value})
+    setFilter({ from: filter.from, to: value })
     setFlag(!flag)
   }
 
   function refreshCalendar() {
     refreshFilter()
     setFlag(false)
-    setFilter({from: 0, to: 0})
+    setFilter({ from: 0, to: 0 })
   }
 
   return (
     <>
       <h2>Uker</h2>
-      <button className='week-cards-button' disabled={(filter.from === 0)} onClick={refreshCalendar}>Refresh</button>
+      <button
+        className="week-cards-button"
+        disabled={filter.from === 0}
+        onClick={refreshCalendar}
+      >
+        Refresh
+      </button>
       {years.map((year: Year) => {
         return (
           <>
@@ -86,7 +89,7 @@ export default function Weeks({filterWeeks, refreshFilter}: WeeksProps) {
                 )
               })}
             </ul>
-            <hr/>
+            <hr />
           </>
         )
       })}

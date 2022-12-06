@@ -24,9 +24,6 @@ export default function CreateEmployee() {
         body: JSON.stringify({ employeeNum, name, rules }),
       })
 
-      const createdEmployee = await response.json()
-      console.log(createdEmployee)
-
       setStatus('success')
       router.push(`/employees`)
     } catch (error) {

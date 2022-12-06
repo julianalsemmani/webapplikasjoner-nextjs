@@ -16,7 +16,6 @@ export default function Employees() {
   useEffect(() => {
     const handler = async () => {
       try {
-        // FIXME: See browser console for error
         const response = await fetch(`/api/employees/${router.query.id}`, {
           method: 'get',
           headers: {
@@ -49,7 +48,6 @@ export default function Employees() {
       })
 
       const updatedEmployee = await response.json()
-      console.log(updatedEmployee)
 
       setStatus('success')
       router.push('/employees/')

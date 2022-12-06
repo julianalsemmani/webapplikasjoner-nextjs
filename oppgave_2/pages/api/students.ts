@@ -10,7 +10,7 @@ export default async function handler(
     case 'get':
       const students = await prisma.student.findMany()
 
-      return res.status(200).json({ status: true, data: { ...students } })
+      return res.status(200).json({ status: true, data: students })
     default:
       return res.status(405).json({
         status: false,

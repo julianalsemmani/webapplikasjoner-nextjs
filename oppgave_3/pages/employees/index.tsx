@@ -18,7 +18,6 @@ export default function Employees() {
 
         const employees = await response.json()
 
-        // setEmployees(Object.values(data.data))
         setEmployees(employees.data)
       } catch (error) {
         console.log(error)

@@ -1,11 +1,4 @@
 // TODO: Her er det bugs
-/* 
-  CHANGES DONE
-  > uses .map() instead of .forEach()
-
-  SUGGESTIONS
-  > 
-*/
 
 export type Strike = {
   icon: string

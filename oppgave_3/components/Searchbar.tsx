@@ -8,7 +8,6 @@ export default function SearchBar() {
 
   const isLoading = status === 'loading'
   const isError = status === 'error'
-  const isSuccess = status === 'success'
 
   const router = useRouter()
 
@@ -19,7 +18,6 @@ export default function SearchBar() {
     try {
       const result = await getEmployeeByName(name)
       setStatus('success')
-      console.log(result)
       if (result.status && result.data.length === 1) {
         await router.push(`/employees/${result?.data[0].id}`)
       } else {

@@ -1,13 +1,4 @@
 // TODO: Her er det bugs
-/* 
-  CHANGES DONE
-  > changed const result = { data: [] } to const result = await response.json()
-    --> setCountry(result.data())
-  > added isMatch = {isMatch} to fulfill component Words.tsx parameters
-
-  SUGGESTIONS
-  > 
-*/
 
 import type { NextPage } from 'next'
 import { useEffect, useRef } from 'react'
