@@ -49,8 +49,6 @@ export default function WeekCards({from, to}: Filter) {
       days = Array<Day | null>(5).fill(null)
     }
 
-    console.log(days)
-
     return days.map((day) => {
       if (day === null) return <td className="utilgjengelig">Utilgjengelig</td>
       return (

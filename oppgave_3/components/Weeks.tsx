@@ -62,13 +62,14 @@ export default function Weeks({filterWeeks}: WeeksProps) {
               {year.week.map((week: Week) => {
                 return (
                   <li key={week.id}>
-                    <button onClick={clickHandler} className={
+                    <button onClick={clickHandler} className={"calenderCell " +
                       `${week.week >= filter.from && week.week <= filter.to ? 'activeCalendarCell' : ''}`
                     }>{week.week} </button>
                   </li>
                 )
               })}
             </ul>
+              <hr />
           </>
         )
       })}

@@ -9,7 +9,10 @@ main {
 .weeks {
   display: flex;
   flex-wrap: wrap;
-  border-bottom: grey solid;
+}
+
+hr {
+  margin-top: 2rem;
 }
 
 .weeks li {
@@ -130,8 +133,28 @@ nav a {
   font-size: 1.5rem;
 }
 
+.calenderCell {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.calenderCell:hover {
+  background: #78c27b;
+  color: #fff;
+  transition: 0.3s ease;
+}
+
 .activeCalendarCell {
-  background: #fd2238;
+  background: #4CAF50;
+  transition: 0.3s ease;
+  color: #fff;
 }
 
 /* Form */
