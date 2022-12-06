@@ -13,8 +13,7 @@ export const getAllOverwrites = async (res: NextApiResponse<Result>) => {
 
   return res.status(200).json({
     status: true,
-    // FIXME: typescript-error
-    data: overwrites.data,
+    data: overwrites.data!,
   })
 }
 

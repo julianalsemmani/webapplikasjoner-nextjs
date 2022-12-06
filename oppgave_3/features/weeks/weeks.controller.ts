@@ -14,8 +14,7 @@ export const getAllWeeks = async (res: NextApiResponse<Result>) => {
 
   return res.status(200).json({
     status: true,
-    // FIXME: typescript-error
-    data: weeks.data,
+    data: weeks.data!,
   })
 }
 
@@ -63,7 +62,6 @@ export const getWeeksByQueryParameters = async ({
 
   return res.status(200).json({
     status: true,
-    // FIXME: typescript-error
-    data: weeks.data,
+    data: weeks.data!,
   })
 }

@@ -14,7 +14,6 @@ export const getAllYears = async (res: NextApiResponse<Result>) => {
 
   return res.status(200).json({
     status: true,
-    // FIXME: typescript-error
-    data: years.data,
+    data: years.data!,
   })
 }

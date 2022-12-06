@@ -43,8 +43,7 @@ export const getAllEmployees = async (res: NextApiResponse<Result>) => {
 
   return res.status(200).json({
     status: true,
-    // FIXME: typescript-error
-    data: employees.data,
+    data: employees.data!,
   })
 }
 
@@ -106,6 +105,5 @@ export const getEmployeeBySearchingName = async ({
   if (!employee?.status)
     return res.status(404).json({ status: false, error: 'Employee not found' })
 
-  // FIXME: Typescript error
-  return res.status(200).json({ status: true, data: employee.data })
+  return res.status(200).json({ status: true, data: employee.data! })
 }
