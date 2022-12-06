@@ -1,8 +1,7 @@
-import {NextApiRequest, NextApiResponse} from "next";
+import { NextApiRequest, NextApiResponse } from 'next'
 import ExcelJS from 'exceljs'
 
-import prisma from "../../../lib/db";
-
+import prisma from '../../../lib/db'
 
 export default async function handler(
   req: NextApiRequest,
@@ -15,23 +14,35 @@ export default async function handler(
           day: {
             include: {
               employee: true,
+              overWrites: {
+                include: {
+                  employee: true,
+                },
+              },
             },
           },
         },
       })
 
       const workbook = new ExcelJS.Workbook()
-      const sheet = workbook.addWorksheet("report")
+      const sheet = workbook.addWorksheet('report')
       sheet.columns = [
-        {header: 'Week', key: 'week'},
-        {header: 'Day', key: 'day'},
-        {header: 'Employee', key: 'employee'},
+        { header: 'Week', key: 'week' },
+        { header: 'Day', key: 'day' },
+        { header: 'Employee', key: 'employee' },
       ]
 
       weeks.map((week) => {
-        sheet.addRow({week: week.week})
+        sheet.addRow({ week: week.week })
         week.day.map((day) => {
-          sheet.addRow({day: day.name, employee: day.employee.name})
+          if (day.overWrites.length > 0) {
+            sheet.addRow({
+              day: day.name,
+              employee: day.overWrites[0].employee.name,
+            })
+          } else {
+            sheet.addRow({ day: day.name, employee: day.employee.name })
+          }
         })
       })
 
@@ -40,7 +51,10 @@ export default async function handler(
       return res
         .status(200)
         .setHeader('Content-Length', buff.byteLength)
-        .setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        .setHeader(
+          'Content-Type',
+          'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        )
         .setHeader('Content-Disposition', 'attachment; filename=report.xlsx')
         .send(buff)
     default:
