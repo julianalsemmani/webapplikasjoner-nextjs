@@ -1,6 +1,6 @@
 export type Data = {
   status: true
-  data: Record<string, unknown>
+  data: Record<string, unknown> | Record<string, unknown>[]
 }
 
 export type Error = {

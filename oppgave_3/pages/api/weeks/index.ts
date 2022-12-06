@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import prisma from '../../../lib/db'
 import { Result } from '../../../types'
+import * as weeksController from '../../../features/weeks/weeks.controller'
 
 export default async function handler(
   req: NextApiRequest,
@@ -8,17 +8,7 @@ export default async function handler(
 ) {
   switch (req.method?.toLowerCase()) {
     case 'get':
-      const weeks = await prisma.week.findMany({
-        include: {
-          day: {
-            include: {
-              employee: true,
-            },
-          },
-        },
-      })
-
-      return res.status(200).json({ status: true, data: { ...weeks } })
+      return await weeksController.getAllWeeks(res)
     default:
       return res.status(405).json({
         status: false,

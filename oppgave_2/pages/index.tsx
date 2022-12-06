@@ -23,7 +23,7 @@ const Home: NextPage = () => {
         })
 
         const result = await response.json()
-        setStudents(Object.values(result.data))
+        setStudents(result.data)
       } catch (error) {
         console.log(error)
       }
@@ -34,10 +34,6 @@ const Home: NextPage = () => {
 
   return (
     <main>
-      {/* DEBUGGING TO SEE CURRENT CATEGORY*/}
-      <p>DEBUG</p>
-      <p>Current category: {category}</p>
-
       <h1>Student gruppering</h1>
       <RadioButtons handleChange={handleChange} />
       <DisplayStudents students={students} category={category} />

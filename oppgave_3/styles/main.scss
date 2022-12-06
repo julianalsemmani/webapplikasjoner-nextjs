@@ -9,7 +9,10 @@ main {
 .weeks {
   display: flex;
   flex-wrap: wrap;
-  border-bottom: grey solid;
+}
+
+hr {
+  margin-top: 2rem;
 }
 
 .weeks li {
@@ -55,11 +58,22 @@ section {
   cursor: pointer;
 }
 
-.week-cards-button:hover {
+.week-cards-button:disabled {
+  background-color: #ccc;
+  color: #fff;
+  cursor: not-allowed;
+}
+
+.week-cards-button:hover:not([disabled]) {
   text-decoration: underline;
   color: #4CAF50;
   background-color: white;
   transition: 0.3s ease;
+}
+
+.week-index {
+  min-height: 1500px;
+  padding-bottom: 20px;
 }
 
 /* Tables */
@@ -76,6 +90,16 @@ a:hover {
 
 .utilgjengelig {
   color: red;
+}
+
+.span-cursor {
+  cursor: pointer;
+}
+
+.utilgjengelig-person {
+  color: red;
+  text-decoration: line-through;
+  cursor:pointer;
 }
 
 .table-style {
@@ -105,7 +129,7 @@ a:hover {
 
 /* Navbar */
 nav {
-  background-color: #ddd;
+  background-color: #4CAF50;
   height: 60px;
   display: flex;
   align-items: center;
@@ -125,13 +149,33 @@ nav ul li {
 }
 
 nav a {
-  color: #000;
+  color: #fff;
   text-decoration: none;
   font-size: 1.5rem;
 }
 
+.calenderCell {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.calenderCell:hover {
+  background: #78c27b;
+  color: #fff;
+  transition: 0.3s ease;
+}
+
 .activeCalendarCell {
-  background: #fd2238;
+  background: #4CAF50;
+  transition: 0.3s ease;
+  color: #fff;
 }
 
 /* Form */
@@ -144,7 +188,7 @@ form {
   width: 50%;
 }
 
-form input {
+form input, form select {
   margin: 10px;
   padding: 10px;
   width: 100%;
@@ -152,7 +196,7 @@ form input {
   border-radius: 5px;
 }
 
-form input:focus {
+form input:focus, form select:focus {
   outline: none;
   border: 1px solid #4CAF50;
   box-shadow: 0 0 10px #719ECE;

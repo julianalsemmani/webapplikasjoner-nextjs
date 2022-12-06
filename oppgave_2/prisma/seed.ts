@@ -3,14 +3,12 @@ import { faker } from '@faker-js/faker'
 
 const prisma = new PrismaClient()
 
-// GROUPS FOR FAKE DATA
 const groups = [
   'Informatikk',
   'Digitale medier og design',
   'Informasjonssystemer',
 ]
 
-// USED TO CREATE FAKE DATA
 const studentFactory = (count: number) => {
   return Array(count)
     .fill(null)
