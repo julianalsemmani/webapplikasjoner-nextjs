@@ -29,8 +29,7 @@ export const createEmployee = async ({
   try {
     const employee = await prisma.employee.create({
       data: {
-        // FIXME: typescript-error
-        employeeNum: parseInt(employeeNum),
+        employeeNum: employeeNum,
         name: name,
         rules: rules,
       },

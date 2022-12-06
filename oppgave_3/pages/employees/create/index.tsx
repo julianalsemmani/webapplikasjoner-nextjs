@@ -4,9 +4,10 @@ import Navbar from '../../../components/Navbar'
 
 export default function CreateEmployee() {
   const [name, setName] = useState<string>('')
-  const [employeeNum, setEmployeeNum] = useState<string>('')
+  const [employeeNum, setEmployeeNum] = useState<number>()
   const [rules, setRules] = useState<string>('')
   const [status, setStatus] = useState('idle')
+
   const isLoading = status === 'loading'
   const isError = status === 'error'
   const router = useRouter()
@@ -51,15 +52,20 @@ export default function CreateEmployee() {
       <form onSubmit={handleSubmit}>
         <label htmlFor="employeeNum">Ansatt nummer:</label>
         <input
-          type="text"
+          type="number"
           value={employeeNum}
-          onChange={(e) => setEmployeeNum(e.target.value)}
+          onChange={(e) => setEmployeeNum(e.target.valueAsNumber)}
         />
         <label htmlFor="name">Navn:</label>
         <input
           type="text"
           value={name}
-          onChange={(e) => setName(e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1).toLowerCase())}
+          onChange={(e) =>
+            setName(
+              e.target.value.charAt(0).toUpperCase() +
+                e.target.value.slice(1).toLowerCase()
+            )
+          }
         />
 
         <label htmlFor="rules">Regler:</label>
