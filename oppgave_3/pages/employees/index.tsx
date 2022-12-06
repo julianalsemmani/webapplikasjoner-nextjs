@@ -16,9 +16,10 @@ export default function Employees() {
           },
         })
 
-        const data = await response.json()
+        const employees = await response.json()
 
-        setEmployees(Object.values(data.data))
+        // setEmployees(Object.values(data.data))
+        setEmployees(employees.data)
       } catch (error) {
         console.log(error)
       }
@@ -32,8 +33,7 @@ export default function Employees() {
       <main>
         <Navbar />
         <h1>Ansattliste:</h1>
-        {/* FIXME: Better key? */}
-        <table className="table-style" key={2}>
+        <table className="table-style">
           <thead>
             <tr>
               <th>Id</th>
@@ -43,6 +43,7 @@ export default function Employees() {
               <th>Handling</th>
             </tr>
           </thead>
+
           <tbody>
             {employees.map((employee: Employee) => {
               return (

@@ -1,7 +1,4 @@
-import { randomUUID } from 'crypto'
 import { NextApiRequest, NextApiResponse } from 'next'
-import { E } from 'vitest/dist/global-732f9b14'
-import prisma from '../../../../lib/db'
 import { Result } from '../../../../types'
 import * as employeeController from '../../../../features/employees/employees.controller'
 

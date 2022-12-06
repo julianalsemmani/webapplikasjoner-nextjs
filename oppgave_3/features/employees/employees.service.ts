@@ -6,13 +6,10 @@ export const createEmployee = async ({
   name,
   rules,
 }: MVCEmployeeProps) => {
-  const existingEmployee = await employeeRepository.employeeExists({
-    employeeNum,
-    name,
-    rules,
-  })
+  const existingEmployee =
+    await employeeRepository.employeeExistsUsingEmployeeNum(employeeNum)
 
-  if (existingEmployee.status) {
+  if (existingEmployee?.status) {
     return {
       status: false,
       error: 'Employee already exists',
@@ -46,4 +43,46 @@ export const getAllEmployees = async () => {
   }
 
   return { status: true, data: employees.data }
+}
+
+export const getEmployeeByURL = async (id: string) => {
+  const employee = await employeeRepository.getEmployeeByURL(id)
+
+  if (!employee.status) {
+    return {
+      status: false,
+      error: employee.error,
+    }
+  }
+
+  return { status: true, data: employee.data }
+}
+
+export const updateEmployeeByURL = async (
+  id: string,
+  data: MVCEmployeeProps
+) => {
+  const employee = await employeeRepository.updateEmployeeByURL(id, data)
+
+  if (!employee.status) {
+    return {
+      status: false,
+      error: employee.error,
+    }
+  }
+
+  return { status: true, data: employee.data }
+}
+
+export const getEmployeeBySearchingName = async (name: string) => {
+  const employee = await employeeRepository.getEmployeeBySearchingName(name)
+
+  if (!employee.status) {
+    return {
+      status: false,
+      error: employee.error,
+    }
+  }
+
+  return { status: true, data: employee.data }
 }

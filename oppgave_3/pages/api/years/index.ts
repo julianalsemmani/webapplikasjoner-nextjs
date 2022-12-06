@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import * as yearController from '../../../features/years/years.controller'
 import { Result } from '../../../types'
-import * as weeksController from '../../../features/weeks/weeks.controller'
 
 export default async function handler(
   req: NextApiRequest,
@@ -8,7 +8,7 @@ export default async function handler(
 ) {
   switch (req.method?.toLowerCase()) {
     case 'get':
-      return await weeksController.getAllWeeks(res)
+      return await yearController.getAllYears(res)
     default:
       return res.status(405).json({
         status: false,

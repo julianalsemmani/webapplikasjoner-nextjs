@@ -1,12 +1,10 @@
 import { useState } from 'react'
-import { Employee } from '../types'
 import { getEmployeeByName, getEmployeeById } from '../api/employees'
 import { useRouter } from 'next/router'
 
 export default function SearchBar() {
   const [name, setName] = useState<string>('')
   const [status, setStatus] = useState('idle')
-  // const [employee, setEmployee] = useState<Employee>()
 
   const isLoading = status === 'loading'
   const isError = status === 'error'
@@ -22,13 +20,13 @@ export default function SearchBar() {
       const result = await getEmployeeByName(name)
       setStatus('success')
       console.log(result)
-      if (result.success && result.data.length === 1) {
+      if (result.status && result.data.length === 1) {
         await router.push(`/employees/${result?.data[0].id}`)
       } else {
         setStatus('error')
         setTimeout(() => {
-          setName("");
-          setStatus('success');
+          setName('')
+          setStatus('success')
         }, 1500)
       }
     } catch (error) {

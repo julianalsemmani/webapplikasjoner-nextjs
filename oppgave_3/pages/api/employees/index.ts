@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import prisma from '../../../lib/db'
 import { Result } from '../../../types'
 import * as employeeController from '../../../features/employees/employees.controller'
 

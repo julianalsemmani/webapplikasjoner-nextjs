@@ -2,9 +2,6 @@ import { useEffect, useState } from 'react'
 import { Employee } from '../../../types'
 import Navbar from '../../../components/Navbar'
 import { useRouter } from 'next/router'
-import { e } from 'vitest/dist/index-40e0cb97'
-import { employees } from '../../../data/employees'
-import { getEmployeeById } from '../../../api/employees'
 
 export default function Employees() {
   const [name, setName] = useState<string>('')
@@ -27,8 +24,9 @@ export default function Employees() {
           },
         })
 
-        const data = await response.json()
-        setEmployee(data.data)
+        const employee = await response.json()
+
+        setEmployee(employee.data)
       } catch (error) {
         console.log(error)
       }
@@ -50,11 +48,11 @@ export default function Employees() {
         body: JSON.stringify({ id: String(employee?.id), name: String(name) }),
       })
 
-      const data = await response.json()
-      console.log(data)
+      const updatedEmployee = await response.json()
+      console.log(updatedEmployee)
 
       setStatus('success')
-      router.push(`/employees`)
+      router.push('/employees/')
     } catch (error) {
       setStatus('error')
       console.log(error)
@@ -83,6 +81,7 @@ export default function Employees() {
               <th>Regler</th>
             </tr>
           </thead>
+
           <tbody>
             <tr key={employee?.id}>
               <td>{employee?.id}</td>

@@ -8,7 +8,7 @@ export const createEmployee = async ({ req, res }: MVCRequestResponse) => {
   if (!employeeNum || !name || !rules) {
     return res.status(400).json({
       status: false,
-      error: 'Missing fields',
+      error: 'Missing required fields: employeeNum, name, rules',
     })
   }
 
@@ -18,7 +18,7 @@ export const createEmployee = async ({ req, res }: MVCRequestResponse) => {
     rules,
   })
 
-  if (!createdEmployee.status) {
+  if (!createdEmployee?.status) {
     return res.status(500).json({
       status: false,
       error: createdEmployee.error!,
@@ -34,7 +34,7 @@ export const createEmployee = async ({ req, res }: MVCRequestResponse) => {
 export const getAllEmployees = async (res: NextApiResponse<Result>) => {
   const employees = await employeeService.getAllEmployees()
 
-  if (!employees.status) {
+  if (!employees?.status) {
     return res.status(500).json({
       status: false,
       error: 'Failed getting employees',
@@ -43,6 +43,62 @@ export const getAllEmployees = async (res: NextApiResponse<Result>) => {
 
   return res.status(200).json({
     status: true,
-    data: { ...employees.data },
+    // FIXME: typescript-error
+    data: employees.data,
   })
+}
+
+export const getEmployeeByURL = async ({ req, res }: MVCRequestResponse) => {
+  const id =
+    req.query.id instanceof Array
+      ? req.query.id.find((i) => i.includes('id'))
+      : req.query.id
+
+  if (!id)
+    return res.status(400).json({ status: false, error: 'Id is missing' })
+
+  const employee = await employeeService.getEmployeeByURL(id)
+
+  if (!employee?.status) {
+    return res.status(404).json({ status: false, error: 'Employee not found' })
+  }
+
+  return res.status(200).json({ status: true, data: { ...employee.data } })
+}
+
+export const updateEmployeeByURL = async ({ req, res }: MVCRequestResponse) => {
+  const { id: id, ...data } = req.body
+
+  if (!id) {
+    return res.status(400).json({ status: false, error: 'Id not found' })
+  } else if (!data) {
+    return res.status(400).json({ status: false, error: 'Missing data' })
+  }
+
+  const updatedEmployee = await employeeService.updateEmployeeByURL(id, data)
+
+  return res
+    .status(200)
+    .json({ status: true, data: { ...updatedEmployee.data } })
+}
+
+export const getEmployeeBySearchingName = async ({
+  req,
+  res,
+}: MVCRequestResponse) => {
+  const name =
+    req.query.name instanceof Array
+      ? req.query.name.find((i) => i.includes('name'))
+      : req.query.name
+
+  if (!name)
+    return res.status(400).json({ status: false, error: 'Name is missing' })
+
+  const employee = await employeeService.getEmployeeBySearchingName(name)
+
+  if (!employee?.status)
+    return res.status(404).json({ status: false, error: 'Employee not found' })
+
+  // FIXME: Typescript error
+  return res.status(200).json({ status: true, data: employee.data })
 }
