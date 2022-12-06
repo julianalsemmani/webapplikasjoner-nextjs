@@ -7,7 +7,7 @@
 
 **WEEKS**
 - api/weeks/ <br />
-  → api/weeks/[id]
+  → api/weeks/[id] <br />
   → api/weeks/range
 
 **YEARS**
@@ -129,6 +129,8 @@
 - ***api/report*** <br />
 *Happy-path* <br />
 → ‘GET’: *“ status: 200 ”* <br /> <br />
+*Unhappy-path* <br />
+→ ‘GET’: *“ status: 500, error: 'Failed downloading report' ”* <br />
 
 **ERROR** <br />
 - ***FELLES ERROR*** <br />
