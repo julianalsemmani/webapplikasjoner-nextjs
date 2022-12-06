@@ -1,4 +1,13 @@
 // TODO: Her er det bugs
+/* 
+  CHANGES DONE
+  > changed const result = { data: [] } to const result = await response.json()
+    --> setCountry(result.data())
+  > added isMatch = {isMatch} to fulfill component Words.tsx parameters
+
+  SUGGESTIONS
+  > 
+*/
 
 import type { NextPage } from 'next'
 import { useEffect, useRef } from 'react'
@@ -23,6 +32,7 @@ const Home: NextPage = () => {
   useEffect(() => {
     if (!isFirstRender.current) return
     isFirstRender.current = false
+
     const handler = async () => {
       try {
         const response = await fetch('/api/countries', {
@@ -32,11 +42,14 @@ const Home: NextPage = () => {
           },
         })
 
-        const result = { data: [] }
+        const result = await response.json()
+        setCountry(result.data)
+        console.log(result.data.name) // FOR CONSOLE DEBUGGING
       } catch (error) {
         console.log(error)
       }
     }
+
     handler()
   }, [setCountry])
 
@@ -45,7 +58,7 @@ const Home: NextPage = () => {
       <h1>Gjett flagget</h1>
       <p className="flag">{country?.unicodeFlag}</p>
       <Strikes strikes={strikes} />
-      <Words words={wordSplit()} />
+      <Words words={wordSplit()} isMatch={isMatch} />
       <Letters
         handleGuess={handleGuess}
         guesses={guesses}
