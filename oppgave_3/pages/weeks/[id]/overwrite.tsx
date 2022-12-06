@@ -72,13 +72,13 @@ export default function Overwrite() {
             })
 
             const createdOverwrite = await response.json()
-            // console.log(createdOverwrite)
+
+            router.push(`/employees`)
         } catch (error) {
             console.log(error)
         }
     }
 
-    console.log(day)
 
     return (
         <>
