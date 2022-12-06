@@ -65,11 +65,14 @@ export default function Weeks({ filterWeeks }: WeeksProps) {
                   <li key={week.id}>
                     <button
                       onClick={clickHandler}
-                      className={`${
-                        week.week >= filter.from && week.week <= filter.to
-                          ? 'activeCalendarCell'
-                          : ''
-                      }`}
+                      className={
+                        'calenderCell ' +
+                        `${
+                          week.week >= filter.from && week.week <= filter.to
+                            ? 'activeCalendarCell'
+                            : ''
+                        }`
+                      }
                     >
                       {week.week}{' '}
                     </button>
@@ -77,6 +80,7 @@ export default function Weeks({ filterWeeks }: WeeksProps) {
                 )
               })}
             </ul>
+            <hr />
           </>
         )
       })}

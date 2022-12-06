@@ -54,7 +54,7 @@ export default function WeekCards({ from, to }: Filter) {
       return (
         <td key={day.id}>
           <Link href={`/employees/${day.employee.id}`}>
-            {day.employee.name}
+            {day.overWrites.length > 0 ? day.overWrites[0].employee.name : day.employee.name}
           </Link>
         </td>
       )
