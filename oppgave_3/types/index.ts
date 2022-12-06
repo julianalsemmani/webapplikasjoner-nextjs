@@ -27,6 +27,7 @@ export type Day = {
   employeeNum: number
   week: Week
   weekId: string
+  overWrites: Overwrites[]
 }
 
 export type Week = {
@@ -41,6 +42,15 @@ export type Year = {
   id: string
   name: string
   week: Week[]
+}
+
+export type Overwrites = {
+  id: string
+  day: Day[]
+  week: Week
+  weekId: string
+  employee: Employee
+  employeeNum: number
 }
 
 export type MVCEmployeeProps = {
