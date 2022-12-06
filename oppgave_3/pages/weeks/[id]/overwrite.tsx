@@ -23,6 +23,7 @@ export default function Overwrite() {
             .then((data) => setDay(data.data.day))
 
         var tempEmp: Employee[] = []
+        tempEmp.push({ id: "0", name: 'Velg ansatt', employeeNum: 0 })
         fetch('/api/employees', {
             method: 'get',
             headers: {
@@ -70,35 +71,20 @@ export default function Overwrite() {
                 }),
             })
 
-            console.log(JSON.stringify({
-                dayId: currentDay.id,
-                employeeNum: currentEmp.employeeNum,
-                day: currentDay,
-                employee: currentEmp,
-            }))
-
             const createdOverwrite = await response.json()
             // console.log(createdOverwrite)
         } catch (error) {
             console.log(error)
-            console.log(
-                JSON.stringify({
-                    dayId: currentDay.id,
-                    employeeNum: currentEmp.employeeNum,
-                    day: currentDay,
-                    employee: currentEmp,
-                })
-            )
         }
     }
+
+    console.log(day)
 
     return (
         <>
             <main>
                 <Navbar />
-                <h1>Overskriv Dag</h1>
-                <p>{selectedDay}</p>
-                <p>{name}</p>
+                <h1>Overskriv dag for valgt uke</h1>
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="day">Dag:</label>
                     <select
@@ -107,6 +93,7 @@ export default function Overwrite() {
                         value={selectedDay}
                         onChange={(e) => setSelectedDay(e.target.value)}
                     >
+                        <option key="null">Velg en dag</option>
                         {day?.map((day: Day) => {
                             return (
                                 <option key={day.id} value={day.id}>
@@ -131,7 +118,8 @@ export default function Overwrite() {
                             )
                         })}
                     </select>
-                    <button type="submit">Overskriv Dag</button>
+                    {name == '' || name == String("0") || selectedDay == 'Velg en dag' ? "Du må velge en ansatt" : <button type="submit">Overskriv Dag</button> }
+                    
                 </form>
             </main>
         </>
