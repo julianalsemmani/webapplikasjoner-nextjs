@@ -46,6 +46,7 @@ export const getWeekByURL = async (id: string) => {
               include: {
                 employee: {
                   select: {
+                    id: true,
                     name: true,
                   },
                 },
@@ -82,6 +83,7 @@ export const getWeeksByQueryParameters = async (from: number, to: number) => {
               include: {
                 employee: {
                   select: {
+                    id: true,
                     name: true,
                   },
                 },
