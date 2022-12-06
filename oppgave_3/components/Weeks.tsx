@@ -1,11 +1,11 @@
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import {Year, Week} from '../types'
-import {Filter, WeeksProps} from "../pages";
+import { Year, Week } from '../types'
+import { Filter, WeeksProps } from '../pages'
 
-export default function Weeks({filterWeeks}: WeeksProps) {
+export default function Weeks({ filterWeeks }: WeeksProps) {
   const [years, setYears] = useState<Year[]>([])
-  const [filter, setFilter] = useState<Filter>({from: 0, to: 0})
+  const [filter, setFilter] = useState<Filter>({ from: 0, to: 0 })
   const [flag, setFlag] = useState<boolean>(false)
 
   useEffect(() => {
@@ -17,22 +17,24 @@ export default function Weeks({filterWeeks}: WeeksProps) {
             'Content-Type': 'application/json',
           },
         })
-        const data = await response.json()
-        setYears(Object.values(data.data))
+
+        const years = await response.json()
+
+        setYears(Object.values(years.data))
+        // setYears(years.data)
+        console.log(response)
       } catch (error) {
         console.error(error)
       }
     }
 
-    handler()
-      .catch((err) => console.log(err))
+    handler().catch((err) => console.log(err))
   }, [])
-
 
   useEffect(() => {
     console.log(filter)
-    if (!flag && (filter.from > filter.to)) {
-      setFilter({from: filter.to, to: filter.from})
+    if (!flag && filter.from > filter.to) {
+      setFilter({ from: filter.to, to: filter.from })
     }
     filterWeeks(filter.from, filter.to)
   }, [filter])
@@ -42,12 +44,11 @@ export default function Weeks({filterWeeks}: WeeksProps) {
     const value: number = parseInt(e.target.innerHTML)
     console.log(flag)
     if (!flag) {
-
-      setFilter({from: value, to: value})
+      setFilter({ from: value, to: value })
       setFlag(!flag)
       return
     }
-    setFilter({from: filter.from, to: value})
+    setFilter({ from: filter.from, to: value })
     setFlag(!flag)
   }
 
@@ -62,14 +63,24 @@ export default function Weeks({filterWeeks}: WeeksProps) {
               {year.week.map((week: Week) => {
                 return (
                   <li key={week.id}>
-                    <button onClick={clickHandler} className={"calenderCell " +
-                      `${week.week >= filter.from && week.week <= filter.to ? 'activeCalendarCell' : ''}`
-                    }>{week.week} </button>
+                    <button
+                      onClick={clickHandler}
+                      className={
+                        'calenderCell ' +
+                        `${
+                          week.week >= filter.from && week.week <= filter.to
+                            ? 'activeCalendarCell'
+                            : ''
+                        }`
+                      }
+                    >
+                      {week.week}{' '}
+                    </button>
                   </li>
                 )
               })}
             </ul>
-              <hr />
+            <hr />
           </>
         )
       })}

@@ -17,22 +17,22 @@ export type Filter = {
 const Home: NextPage = () => {
   const [filter, setFilter] = useState<Filter>({ from: 0, to: 0 })
 
-  useEffect(() => {
-    const handler = async () => {
-      try {
-        // const reponse = await fetch('/api/demo', {
-        //   method: 'get',
-        //   headers: {
-        //     'Content-Type': 'application/json',
-        //   },
-        // })
-      } catch (error) {
-        console.error(error)
-      }
-    }
+  // useEffect(() => {
+  //   const handler = async () => {
+  //     try {
+  //       const reponse = await fetch('/api/demo', {
+  //         method: 'get',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //       })
+  //     } catch (error) {
+  //       console.error(error)
+  //     }
+  //   }
 
-    handler()
-  }, [])
+  //   handler()
+  // }, [])
 
   function handleFilter(from: number, to: number) {
     console.log(`From: ${from}; to: ${to}`)
@@ -42,7 +42,6 @@ const Home: NextPage = () => {
 
   return (
     <main>
-      <h1>Lunsjkalender</h1>
       <Navbar />
       <Searchbar />
       <Weeks filterWeeks={handleFilter} />

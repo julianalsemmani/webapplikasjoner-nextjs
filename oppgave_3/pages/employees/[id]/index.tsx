@@ -22,8 +22,9 @@ export default function Employee() {
           },
         })
 
-        const data = await response.json()
-        setEmployee(data.data)
+        const employee = await response.json()
+
+        setEmployee(employee.data)
       } catch (error) {
         console.log(error)
       }
@@ -47,6 +48,7 @@ export default function Employee() {
               <th>Navn</th>
             </tr>
           </thead>
+
           <tbody>
             {employee?.day.map((day: Day) => {
               return (
@@ -62,23 +64,6 @@ export default function Employee() {
           </tbody>
         </table>
       </main>
-
-      {/* {employee?.day.map((day: Day) => {
-        return (
-          <section key={day.id}>
-            <ul>
-              <li>
-                <span>
-                  Uke:{' '}
-                  <Link href={`/weeks/${day.week.id}`}>{day.week.week}</Link>
-                </span>{' '}
-                <span>Dag: {day.name} </span>
-                <span>Navn: {employee.name} </span>
-              </li>
-            </ul>
-          </section>
-        )
-      })} */}
     </>
   )
 }

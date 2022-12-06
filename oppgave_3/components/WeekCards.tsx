@@ -1,9 +1,9 @@
-import {useState, useEffect, ReactNode} from 'react'
+import { useState, useEffect, ReactNode } from 'react'
 import Link from 'next/link'
-import {Day, Week} from '../types'
-import {Filter} from "../pages";
+import { Day, Week } from '../types'
+import { Filter } from '../pages'
 
-export default function WeekCards({from, to}: Filter) {
+export default function WeekCards({ from, to }: Filter) {
   const [weeks, setWeeks] = useState<Week[]>([])
   const [toggle, setToggle] = useState<Record<string, boolean>>({})
 
@@ -24,24 +24,24 @@ export default function WeekCards({from, to}: Filter) {
           },
         })
 
-        const data = await response.json()
+        const weeks = await response.json()
 
-        setWeeks(Object.values(data.data))
+        // setWeeks(Object.values(data.data))
+        setWeeks(weeks.data)
       } catch (error) {
         console.log(error)
       }
     }
 
-    const url = (from === 0 || to === 0)
-      ? '/api/weeks'
-      : `/api/weeks/range?from=${from}&to=${to}`
+    const url =
+      from === 0 || to === 0
+        ? '/api/weeks'
+        : `/api/weeks/range?from=${from}&to=${to}`
 
-    handler(url)
-      .catch((err) => {
-        console.log(err)
-        setWeeks([])
-      })
-
+    handler(url).catch((err) => {
+      console.log(err)
+      setWeeks([])
+    })
   }, [from, to])
 
   function renderDays(days: (Day | null)[]): ReactNode {
@@ -54,25 +54,25 @@ export default function WeekCards({from, to}: Filter) {
       return (
         <td key={day.id}>
           <Link href={`/employees/${day.employee.id}`}>
-            {day.overWrites.length > 0 ? day.overWrites[0].employee.name : day.employee.name}
+            {day.overWrites.length > 0
+              ? day.overWrites[0].employee.name
+              : day.employee.name}
           </Link>
         </td>
       )
     })
   }
 
-
   return (
-
     <>
-      {weeks.map((week: Week) => {
+      {weeks?.map((week: Week) => {
         return (
           <>
             <section>
               <h2 className="week-cards-title">Uke {week.week}</h2>
               <button
                 onClick={() => toggleFunction(week.id)}
-                style={{display: toggle[week.id] ? 'none' : ''}}
+                style={{ display: toggle[week.id] ? 'none' : '' }}
                 className="week-cards-button"
               >
                 Se dager
@@ -81,28 +81,26 @@ export default function WeekCards({from, to}: Filter) {
               <table
                 className="table-style"
                 key={week.id}
-                style={{display: toggle[week.id] ? '' : 'none'}}
+                style={{ display: toggle[week.id] ? '' : 'none' }}
               >
                 <thead>
-                <tr>
-                  <th>Mandag</th>
-                  <th>Tirsdag</th>
-                  <th>Onsdag</th>
-                  <th>Torsdag</th>
-                  <th>Fredag</th>
-                </tr>
+                  <tr>
+                    <th>Mandag</th>
+                    <th>Tirsdag</th>
+                    <th>Onsdag</th>
+                    <th>Torsdag</th>
+                    <th>Fredag</th>
+                  </tr>
                 </thead>
 
                 <tbody>
-                <tr>
-                  {renderDays(week.day)}
-                </tr>
-                <button
-                  onClick={() => toggleFunction(week.id)}
-                  className="week-cards-button"
-                >
-                  Lukk dager
-                </button>
+                  <tr>{renderDays(week.day)}</tr>
+                  <button
+                    onClick={() => toggleFunction(week.id)}
+                    className="week-cards-button"
+                  >
+                    Lukk dager
+                  </button>
                 </tbody>
               </table>
             </section>

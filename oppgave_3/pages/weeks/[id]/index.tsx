@@ -22,8 +22,8 @@ export default function Week() {
           },
         })
 
-        const data = await response.json()
-        setWeek(data.data)
+        const week = await response.json()
+        setWeek(week.data)
       } catch (error) {
         console.log(error)
       }
@@ -35,7 +35,6 @@ export default function Week() {
   return (
     <>
       <main>
-        <h1>Lunsjkalender</h1>
         <Navbar />
 
         <h2>Uke {week?.week}</h2>
@@ -49,6 +48,7 @@ export default function Week() {
               <th>Fredag</th>
             </tr>
           </thead>
+
           <tbody>
             <tr>
               {week?.day.map((day: Day) => {
@@ -63,20 +63,6 @@ export default function Week() {
             </tr>
           </tbody>
         </table>
-        {/* <ul key={week?.week}>
-          {week?.day.map((day: Day) => {
-            return (
-              <>
-                <li key={day.id}>
-                  <span>{day.name}</span>{' '}
-                  <Link href={`/employees/${day.employee.id}`}>
-                    {day.employee.name}
-                  </Link>
-                </li>
-              </>
-            )
-          })}
-        </ul> */}
       </main>
     </>
   )
