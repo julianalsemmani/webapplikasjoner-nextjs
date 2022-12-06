@@ -26,7 +26,6 @@ export default function WeekCards({ from, to }: Filter) {
 
         const weeks = await response.json()
 
-        // setWeeks(Object.values(data.data))
         setWeeks(weeks.data)
       } catch (error) {
         console.log(error)
