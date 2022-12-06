@@ -29,7 +29,7 @@ const Home: NextPage = () => {
   }
 
   return (
-    <main>
+    <main className='week-index'>
       <Navbar/>
       <Searchbar/>
       <Weeks filterWeeks={handleFilter} refreshFilter={refreshFilter}/>
