@@ -1,5 +1,5 @@
-import type { NextPage } from 'next'
-import { useEffect, useState } from 'react'
+import type {NextPage} from 'next'
+import {useEffect, useState} from 'react'
 import Weeks from '../components/Weeks'
 import WeekCards from '../components/WeekCards'
 import Navbar from '../components/Navbar'
@@ -7,6 +7,7 @@ import Searchbar from '../components/Searchbar'
 
 export interface WeeksProps {
   filterWeeks: (from: number, to: number) => void
+  refreshFilter: () => void
 }
 
 export type Filter = {
@@ -15,37 +16,24 @@ export type Filter = {
 }
 
 const Home: NextPage = () => {
-  const [filter, setFilter] = useState<Filter>({ from: 0, to: 0 })
-
-  // useEffect(() => {
-  //   const handler = async () => {
-  //     try {
-  //       const reponse = await fetch('/api/demo', {
-  //         method: 'get',
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //         },
-  //       })
-  //     } catch (error) {
-  //       console.error(error)
-  //     }
-  //   }
-
-  //   handler()
-  // }, [])
+  const [filter, setFilter] = useState<Filter>({from: 0, to: 0})
 
   function handleFilter(from: number, to: number) {
     console.log(`From: ${from}; to: ${to}`)
-    const filterObj: Filter = { from, to }
+    const filterObj: Filter = {from, to}
     setFilter(filterObj)
+  }
+
+  function refreshFilter() {
+    setFilter({from: 0, to: 0})
   }
 
   return (
     <main>
-      <Navbar />
-      <Searchbar />
-      <Weeks filterWeeks={handleFilter} />
-      <WeekCards from={filter.from} to={filter.to} />
+      <Navbar/>
+      <Searchbar/>
+      <Weeks filterWeeks={handleFilter} refreshFilter={refreshFilter}/>
+      <WeekCards from={filter.from} to={filter.to}/>
     </main>
   )
 }
