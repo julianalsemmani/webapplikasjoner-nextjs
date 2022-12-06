@@ -8,6 +8,7 @@ Table Employee {
   name String [not null]
   rules String [not null]
   day Day [not null]
+  overWrites Overwrites [not null]
 }
 
 Table Day {
@@ -40,6 +41,8 @@ Table Overwrites {
   day Day [not null]
   week Week [not null]
   weekId String [not null]
+  employee Employee [not null]
+  employeeNum Int [not null]
 }
 
 Table DayToOverwrites {
@@ -54,3 +57,5 @@ Ref: Day.weekId > Week.id
 Ref: Week.yearId > Year.id
 
 Ref: Overwrites.weekId > Week.id
+
+Ref: Overwrites.employeeNum > Employee.employeeNum

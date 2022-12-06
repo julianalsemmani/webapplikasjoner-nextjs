@@ -17,6 +17,7 @@ model Employee {
   name          String
   rules         String
   day           Day[]
+  overWrites    Overwrites[]
 }
 
 model Day {
@@ -49,4 +50,6 @@ model Overwrites {
   day          Day[]
   week         Week   @relation(fields: [weekId], references: [id])
   weekId       String
+  employee     Employee @relation(fields: [employeeNum], references: [employeeNum])
+  employeeNum  Int
 }

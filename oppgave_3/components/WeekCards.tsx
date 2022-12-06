@@ -49,12 +49,14 @@ export default function WeekCards({from, to}: Filter) {
       days = Array<Day | null>(5).fill(null)
     }
 
+    console.log(days)
+
     return days.map((day) => {
       if (day === null) return <td className="utilgjengelig">Utilgjengelig</td>
       return (
         <td key={day.id}>
           <Link href={`/employees/${day.employee.id}`}>
-            {day.employee.name}
+            {day.overWrites.length > 0 ? day.overWrites[0].employee.name : day.employee.name}
           </Link>
         </td>
       )

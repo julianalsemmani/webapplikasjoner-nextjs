@@ -21,6 +21,15 @@ export default async function handler(
           day: {
             include: {
               employee: true,
+              overWrites: {
+                include: {
+                  employee: {
+                    select: {
+                      name: true,
+                    },
+                  },
+                  }
+              }
             },
           },
         },
