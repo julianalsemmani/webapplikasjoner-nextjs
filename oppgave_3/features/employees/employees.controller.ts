@@ -19,10 +19,19 @@ export const createEmployee = async ({ req, res }: MVCRequestResponse) => {
   })
 
   if (!createdEmployee?.status) {
-    return res.status(500).json({
-      status: false,
-      error: createdEmployee.error!,
-    })
+    switch (createdEmployee?.error) {
+      case 'Failed creating employee':
+        return res.status(500).json({
+          status: false,
+          error: 'Failed creating employee',
+        })
+
+      case 'Employee already exists':
+        return res.status(409).json({
+          status: false,
+          error: 'Employee already exists',
+        })
+    }
   }
 
   return res.status(201).json({

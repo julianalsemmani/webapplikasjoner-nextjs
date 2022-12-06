@@ -62,16 +62,16 @@ export const updateEmployeeByURL = async (
   id: string,
   data: MVCEmployeeProps
 ) => {
-  const employee = await employeeRepository.updateEmployeeByURL(id, data)
+  const updatedEmployee = await employeeRepository.updateEmployeeByURL(id, data)
 
-  if (!employee?.status) {
+  if (!updatedEmployee?.status) {
     return {
       status: false,
-      error: employee.error,
+      error: updatedEmployee.error,
     }
   }
 
-  return { status: true, data: employee.data }
+  return { status: true, data: updatedEmployee.data }
 }
 
 export const getEmployeeBySearchingName = async (name: string) => {

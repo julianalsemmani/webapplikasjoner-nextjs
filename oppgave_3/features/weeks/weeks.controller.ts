@@ -60,6 +60,21 @@ export const getWeeksByQueryParameters = async ({
 
   const weeks = await weekService.getWeeksByQueryParameters(from, to)
 
+  if (!weeks?.status) {
+    switch (weeks?.error) {
+      case 'Invalid query parameters':
+        return res.status(403).json({
+          status: false,
+          error: weeks?.error,
+        })
+      case 'Failed getting weeks by query parameters':
+        return res.status(500).json({
+          status: false,
+          error: weeks?.error,
+        })
+    }
+  }
+
   return res.status(200).json({
     status: true,
     data: weeks.data!,

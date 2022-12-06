@@ -7,7 +7,7 @@ export const getAllOverwrites = async (res: NextApiResponse<Result>) => {
 
   if (!overwrites?.success) {
     return res
-      .status(404)
+      .status(500)
       .json({ status: false, error: 'Failed getting overwrites' })
   }
 
