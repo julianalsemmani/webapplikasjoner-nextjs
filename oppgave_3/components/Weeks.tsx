@@ -60,7 +60,7 @@ export default function Weeks({filterWeeks, refreshFilter}: WeeksProps) {
   return (
     <>
       <h2>Uker</h2>
-      <button disabled={(filter.from === 0)} onClick={refreshCalendar}>Refresh</button>
+      <button className='week-cards-button' disabled={(filter.from === 0)} onClick={refreshCalendar}>Refresh</button>
       {years.map((year: Year) => {
         return (
           <>

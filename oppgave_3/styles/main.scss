@@ -58,7 +58,13 @@ section {
   cursor: pointer;
 }
 
-.week-cards-button:hover {
+.week-cards-button:disabled {
+  background-color: #ccc;
+  color: #fff;
+  cursor: not-allowed;
+}
+
+.week-cards-button:hover:not([disabled]) {
   text-decoration: underline;
   color: #4CAF50;
   background-color: white;
