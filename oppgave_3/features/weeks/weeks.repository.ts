@@ -12,6 +12,7 @@ export const getAllWeeks = async () => {
               include: {
                 employee: {
                   select: {
+                    id: true,
                     name: true,
                   },
                 },
