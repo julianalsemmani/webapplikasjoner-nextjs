@@ -30,6 +30,7 @@ export default async function handler(
         { header: 'Week', key: 'week' },
         { header: 'Day', key: 'day' },
         { header: 'Employee', key: 'employee' },
+        { header: 'Overwrite', key: 'overwrite' },
       ]
 
       weeks.map((week) => {
@@ -38,7 +39,8 @@ export default async function handler(
           if (day.overWrites.length > 0) {
             sheet.addRow({
               day: day.name,
-              employee: day.overWrites[0].employee.name,
+              employee: day.employee.name,
+              overwrite: day.overWrites[0].employee.name,
             })
           } else {
             sheet.addRow({ day: day.name, employee: day.employee.name })
