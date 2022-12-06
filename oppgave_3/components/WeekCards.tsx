@@ -50,7 +50,7 @@ export default function WeekCards({ from, to }: Filter) {
     }
 
     return days.map((day) => {
-      if (day === null) return <td className="utilgjengelig">Utilgjengelig</td>
+      if (day === null) return <td className="utilgjengelig">Ferie</td>
       return (
         <td key={day.id}>
           <Link href={`/employees/${day.employee.id}`}>
