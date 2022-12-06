@@ -168,6 +168,10 @@
 → Page: */index* <br />
 → API: */api/report* <br />
 
+- Lage overskrivelser  <br />
+→ Page: */weeks/[id]/overwrites* <br />
+→ API: */api/overwrite* <br />
+
 ## <ins> Kan gjøres på forsiden </ins> ##
 - Vise hvem som har ansvaret for en gitt periode (uke 2-6)  <br />
 → Page: */index* <br />
