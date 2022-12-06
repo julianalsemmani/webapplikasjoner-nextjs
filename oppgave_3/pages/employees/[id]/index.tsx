@@ -46,6 +46,7 @@ export default function Employee() {
               <th>Uke</th>
               <th>Dag</th>
               <th>Navn</th>
+              <th>Handling</th>
             </tr>
           </thead>
 
@@ -58,6 +59,7 @@ export default function Employee() {
                   </td>
                   <td>{day.name}</td>
                   <td>{employee.name}</td>
+                  <Link href={`/weeks/${day.week.id}/overwrite`}>Overskriv Dag</Link>
                 </tr>
               )
             })}

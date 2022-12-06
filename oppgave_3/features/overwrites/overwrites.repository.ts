@@ -5,6 +5,7 @@ export const getAllOverwrites = async () => {
   try {
     const overwrites = await prisma.overwrites.findMany({
       include: {
+        day: true,
         employee: {
           select: {
             name: true,

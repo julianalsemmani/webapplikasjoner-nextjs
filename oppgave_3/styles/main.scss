@@ -187,7 +187,7 @@ form {
   width: 50%;
 }
 
-form input {
+form input, form select {
   margin: 10px;
   padding: 10px;
   width: 100%;
@@ -195,7 +195,7 @@ form input {
   border-radius: 5px;
 }
 
-form input:focus {
+form input:focus, form select:focus {
   outline: none;
   border: 1px solid #4CAF50;
   box-shadow: 0 0 10px #719ECE;
