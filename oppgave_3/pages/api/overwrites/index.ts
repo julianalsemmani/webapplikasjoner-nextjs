@@ -10,16 +10,7 @@ export default async function handler(
     case 'get':
       return await overwriteController.getAllOverwrites(res)
     case 'post':
-      const { dayId, employeeNum } = req.body
-      const createdOverwrite = await prisma.overwrites.create({
-        data: {
-          dayId,
-          employeeNum,
-        },
-      })
-
-      return res.status(200).json(createdOverwrite)
-    // return await overwriteController.createOverwrite({ req, res })
+      return await overwriteController.createOverwrite({ req, res })
     default:
       return res
         .status(405)
