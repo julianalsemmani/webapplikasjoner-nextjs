@@ -106,14 +106,15 @@ export default function WeekCards({ from, to }: Filter) {
 
                 <tbody>
                   <tr>{renderDays(week.day)}</tr>
-                  <button
-                    onClick={() => toggleFunction(week.id)}
-                    className="week-cards-button"
-                  >
-                    Lukk dager
-                  </button>
                 </tbody>
               </table>
+
+              <button
+                onClick={() => toggleFunction(week.id)}
+                className="week-cards-button"
+              >
+                Lukk dager
+              </button>
             </section>
           </>
         )
