@@ -17,7 +17,7 @@ export default function SearchBar() {
     setStatus('loading')
 
     try {
-      const result = await getEmployeeByName(name)
+      const result = await getEmployeeByName(name.charAt(0).toUpperCase() + name.slice(1))
       setStatus('success')
       console.log(result)
       if (result.status && result.data.length === 1) {
