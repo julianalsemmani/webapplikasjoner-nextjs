@@ -8,7 +8,28 @@ export default async function handler(
 ) {
   switch (req.method?.toLowerCase()) {
     case 'get':
-      return await weeksController.getAllWeeks(res)
+      const weeks = await prisma.week.findMany({
+        include: {
+          day: {
+            include: {
+              employee: true,
+              overWrites: {
+                include: {
+                  employee: {
+                    select: {
+                      name: true,
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      })
+
+      return res.status(200).json({ status: true, data: { ...weeks } })
+    // UNCOMMENT BELOW
+    // return await weeksController.getAllWeeks(res)
     default:
       return res.status(405).json({
         status: false,
