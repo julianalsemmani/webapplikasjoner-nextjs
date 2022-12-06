@@ -53,11 +53,23 @@ export default function WeekCards({ from, to }: Filter) {
       if (day === null) return <td className="utilgjengelig">Ferie</td>
       return (
         <td key={day.id}>
-          <Link href={`/employees/${day.employee.id}`}>
-            {day.overWrites.length > 0
-              ? <span className='span-cursor'><span className='utilgjengelig-person'>{day.employee.name} </span> | <span>{day.overWrites[0].employee.name}</span></span>
-              : day.employee.name}
-          </Link>
+          {day.overWrites.length > 0 ? (
+            <span className="span-cursor">
+              <Link href={`/employees/${day.employee.id}`}>
+                <span className="utilgjengelig-person">
+                  {day.employee.name}
+                </span>
+              </Link>
+              |
+              <Link href={`/employees/${day.overWrites[0].employee.id}`}>
+                <span>{day.overWrites[0].employee.name}</span>
+              </Link>
+            </span>
+          ) : (
+            <Link href={`/employees/${day.employee.id}`}>
+              {day.employee.name}
+            </Link>
+          )}
         </td>
       )
     })
