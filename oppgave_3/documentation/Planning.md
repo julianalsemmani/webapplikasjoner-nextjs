@@ -121,9 +121,12 @@
 **OVERWRITES**
 - ***api/overwrites*** <br />
 *Happy-path* <br />
-→ ‘GET’: *“ status: 200, data: overwrites ”* <br /> <br />
+→ ‘GET’: *“ status: 200, data: overwrites ”* <br />
+→ ‘POST’: *“ status: 201, data: createdOverwrite ”* <br /> <br />
 *Unhappy-path* <br />
 → ‘GET’: *“ status: 500, error: 'Failed getting overwrites' ”* <br />
+→ POST: *“ status: 400, error: 'Missing required fields: dayId, employeeNum' ”* <br />
+→ POST: *“ status: 500, error: 'Failed creating an overwrite' ”* <br />
 
 **REPORT** <br />
 - ***api/report*** <br />
